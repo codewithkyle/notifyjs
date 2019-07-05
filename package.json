@@ -1,0 +1,25 @@
+{
+  "name": "notifyjs",
+  "version": "0.0.1",
+  "description": "A simple JavaScript library for creating snackbar notifications",
+  "main": "notify.js",
+  "types": "./src/global.d.ts",
+  "files": [
+      "Notify.js",
+      "Notify.js.map"
+  ],
+  "scripts": {
+    "compile": "tsc"
+  },
+  "keywords": [
+    "snackbar",
+    "notification",
+    "material",
+    "design"
+  ],
+  "author": "Kyle Andrews",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.5.2"
+  }
+}
