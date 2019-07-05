@@ -1,5 +1,5 @@
 # Notify.js
-Notify.js is a utility library helping to manage simple [snackbar notifications](https://material.io/develop/web/components/snackbars/). Checkout the [live demo]() to see the library in action.
+Notify.js is a utility library helping to manage simple [snackbar notifications](https://material.io/develop/web/components/snackbars/). Checkout the [live demo](https://codewithkyle.github.io/notifyjs/) to see the library in action.
 
 ## Installation
 
@@ -62,7 +62,7 @@ This library doesn't provide/force any base styles or CSS. The notification elem
 </user-notification>
 ```
 
-Below is the CSS for the snackbar notification used on the [demo page](), it is based on the snackbar component from [Material Design](https://material.io/develop/web/components/snackbars/).
+Below is the CSS for the snackbar notification used on the [demo page](https://codewithkyle.github.io/notifyjs/), it is based on the snackbar component from [Material Design](https://material.io/develop/web/components/snackbars/).
 
 ```css
 user-notification{
