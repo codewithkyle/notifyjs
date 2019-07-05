@@ -80,6 +80,7 @@ var Notify = (function () {
         var button = document.body.querySelector('user-notification button');
         if (button) {
             button.addEventListener('click', this.handleAction);
+            notification.style.paddingRight = button.scrollWidth + 12 + "px";
         }
     };
     return Notify;
