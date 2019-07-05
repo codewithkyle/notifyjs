@@ -1,5 +1,5 @@
 # Notify.js
-Notify.js is a utility library helping to manage simple [snackbar notifications](https://material.io/develop/web/components/snackbars/). Checkout the demo to see the library in action.
+Notify.js is a utility library helping to manage simple [snackbar notifications](https://material.io/develop/web/components/snackbars/). Checkout the [live demo]() to see the library in action.
 
 ## Installation
 
