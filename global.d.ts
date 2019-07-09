@@ -1,4 +1,4 @@
-export { Notify as default };
+export { Notify };
 
 export as namespace Notify;
 
