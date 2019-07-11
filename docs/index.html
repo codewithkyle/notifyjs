@@ -272,7 +272,14 @@
                 ],
                 closeable: true,
                 callback: function(value){
-                    console.log(value);
+                    if(value === 'reload')
+                    {
+                        window.alert('You clicked reload');
+                    }
+                    else if(value === 'close')
+                    {
+                        window.alert('You clicked close');
+                    }
                 }
             }); 
         });
