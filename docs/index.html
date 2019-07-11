@@ -74,7 +74,7 @@
         }
 
         p{
-            padding: 0;
+            padding: 0 16px;
             margin: 0;
         }
 
@@ -85,7 +85,7 @@
             transform: translateX(-50%) scale(0.87);
             opacity: 0;
             transform-origin: center bottom;
-            padding: 0 16px;
+            padding: 0;
             border-radius: 4px;
             min-width: 340px;
             max-width: calc(100vw - 64px);
@@ -97,33 +97,56 @@
             line-height: 48px;
             height: 48px;
             z-index: 9999;
+            display: inline-flex;
+            justify-content: space-between;
+            flex-flow: row nowrap;
         }
 
         user-notification.is-infinite{
             animation: popInNotification 150ms cubic-bezier(0.0, 0.0, 0.2, 1) forwards;
         }
 
+        user-notification user-actions{
+            display: inline-flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
         user-notification button{
-            display: inline-block;
+            margin: 0;
+            margin-left: 8px;
             height: 36px;
             line-height: 34px;
-            margin: 0;
-            padding: 0 16px;
+            padding: 0 8px;
             border: none;
             outline: none;
             box-shadow: none;
             border-radius: 2px;
-            position: absolute;
             font-size: 14px;
             text-transform: uppercase;
             user-select: none;
-            top: 6px;
-            right: 6px;
+            background-color: transparent;
+            color: rgb(112, 91, 255);
             transition: all 150ms cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        user-notification button:only-child{
+            margin-left: 0;
+        }
+
+        user-actions button:first-child{
+            margin-left: 0;
+        }
+
+        user-notification button:hover{
+            background-color: rgba(112, 91, 255, 0.25);
+            color: rgb(112, 91, 255);
         }
 
         user-notification button:active{
             transform: none;
+            background-color: rgba(112, 91, 255, 0.4);
+            color: rgb(112, 91, 255);
         }
 
         user-notification close-button{
@@ -134,20 +157,24 @@
             justify-content: center;
             align-items: center;
             flex-flow: column wrap;
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background-color: rgb(106, 90, 205);
-            color: #ffffff;
+            background-color: transparent;
+            color: rgb(112, 91, 255);
             cursor: pointer;
+            margin-left: 8px;
+        }
+
+        user-notification close-button:only-child{
+            margin-left: 0;
         }
 
         user-notification close-button:hover{
-            background-color: hsl(248, 53%, 61%);
+            background-color: rgba(112, 91, 255, 0.25);
+            color: rgb(112, 91, 255);
         }
 
         user-notification close-button:active{
-            background-color: hsl(248, 53%, 55%);
+            background-color: rgba(112, 91, 255, 0.4);
+            color: rgb(112, 91, 255);
         }
 
         user-notification close-button svg{
@@ -192,6 +219,7 @@
             <button class="js-sample-1">Default Notification</button>
             <button class="js-sample-2">Interactive Notification</button>
             <button class="js-sample-3">Closeable Notification</button>
+            <button class="js-sample-4">Fully Loaded Notification</button>
         </div>
     </main>
     <script src="assets/Notify.js" defer="defer"></script>
@@ -199,6 +227,7 @@
         const sample1 = document.body.querySelector('.js-sample-1');
         const sample2 = document.body.querySelector('.js-sample-2');
         const sample3 = document.body.querySelector('.js-sample-3');
+        const sample4 = document.body.querySelector('.js-sample-4');
 
         sample1.addEventListener('click', ()=>{
             new exports['Notify'].prototype.constructor({
@@ -225,6 +254,27 @@
                 duration: Infinity,
                 closeable: true
             });
+        });
+
+        sample4.addEventListener('click', ()=>{
+            new exports['Notify'].prototype.constructor({
+                message: 'Fully interactive snackbar notification message',
+                duration: Infinity,
+                actions: [
+                    {
+                        label: 'Close',
+                        value: 'close'
+                    },
+                    {
+                        label: 'Reload',
+                        value: 'reload'
+                    }
+                ],
+                closeable: true,
+                callback: function(value){
+                    console.log(value);
+                }
+            }); 
         });
     </script>
 </body>
