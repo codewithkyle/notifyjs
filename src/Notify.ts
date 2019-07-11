@@ -10,6 +10,8 @@
  */
 export class Notify{
 
+    private static CLOSE:string = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="times" class="svg-inline--fa fa-times fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"></path></svg>';
+
     private _notification:HTMLElement;
     private _callback:Function;
 
@@ -20,15 +22,20 @@ export class Notify{
             console.error('No options object provided');
             return;
         }
+        this._callback = options.callback;
         this.clearExistingNotifications();
         this.createNotification(options);
     }
 
     private handleAction:EventListener = (e:Event)=>{
         e.preventDefault();
-        const button = document.body.querySelector('user-notification button');
-        button.removeEventListener('click', this.handleAction);
-        this._callback();
+        const target = <HTMLElement>e.currentTarget;
+        this.removeEvents();
+        
+        if(this._callback)
+        {
+            this._callback(target.dataset.value);
+        }
 
         if('remove' in HTMLElement.prototype){
             this._notification.remove();
@@ -38,15 +45,26 @@ export class Notify{
     }
 
     private handleTimeout():void{
-        const button = document.body.querySelector('user-notification button');
-        if(button){
-            button.removeEventListener('click', this.handleAction);
-        }
+        this.removeEvents();
 
         if('remove' in HTMLElement.prototype){
             this._notification.remove();
         }else{
             this._notification.style.display = 'none !important';
+        }
+    }
+
+    private removeEvents():void{
+        const actionEls = Array.from(document.body.querySelectorAll('user-actions button'));
+        for(let i = 0; i < actionEls.length; i++)
+        {
+            actionEls[i].removeEventListener('click', this.handleAction);
+        }
+
+        const closeEl = document.body.querySelector('user-actions close-button');
+        if(closeEl)
+        {
+            closeEl.addEventListener('click', this.handleTimeout);
         }
     }
 
@@ -68,38 +86,72 @@ export class Notify{
         message.innerText = options.message;
         notification.append(message);
 
-        if(options.action){
-            const action = document.createElement('button');
-            action.innerText = options.action.label;
-            this._callback = options.action.callback;
-            notification.append(action);
+        const actions = document.createElement('user-actions');
+        if(options.actions)
+        {
+            for(let i = 0; i < options.actions.length; i++)
+            {
+                const action = document.createElement('button');
+                action.innerText = options.actions[i].label;
+                action.dataset.value = options.actions[i].value;
+                actions.append(action);
+            }
+        }
+
+        if(options.closeable)
+        {
+            const action = document.createElement('close-button');
+            action.setAttribute('aria-label', 'close button');
+            action.innerHTML = Notify.CLOSE;
+            actions.append(action);
+        }
+
+        if(options.actions || options.closeable)
+        {
+            notification.append(actions);
         }
 
         if(options.duration){
-            if(options.duration !== Infinity){
+            if(options.duration !== Infinity)
+            {
                 let duration = options.duration;
 
-                if(duration < 4000){
+                if(duration < 4000)
+                {
                     duration = 4000;
                 }
-                else if(duration > 10000){
+                else if(duration > 10000)
+                {
                     duration = 10000;
                 }
 
                 this.timeout = setTimeout(()=>{ this.handleTimeout(); }, duration);
-            }else{
-                
             }
-        }else{
+            else
+            {
+                notification.classList.add('is-infinite');
+            }
+        }
+        else
+        {
             this.timeout = setTimeout(()=>{ this.handleTimeout(); }, 4000);
         }
-        notification.classList.add('is-infinite');
+
         document.body.append(notification);
         this._notification = notification;
-        const button = document.body.querySelector('user-notification button');
-        if(button){
-            button.addEventListener('click', this.handleAction);
-            notification.style.paddingRight = `${ button.scrollWidth + 12 }px`;
+
+        const actionEls = Array.from(document.body.querySelectorAll('user-actions button'));
+        if(actionEls.length){
+            for(let i = 0; i < actionEls.length; i++)
+            {
+                actionEls[i].addEventListener('click', this.handleAction);
+            }
+            // notification.style.paddingRight = `${ button.scrollWidth + 12 }px`;
+        }
+        const closeEl = document.body.querySelector('user-actions close-button');
+        if(closeEl)
+        {
+            closeEl.addEventListener('click', ()=>{ this.handleTimeout(); });
         }
     }
 }

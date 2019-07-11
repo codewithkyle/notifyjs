@@ -126,6 +126,38 @@
             transform: none;
         }
 
+        user-notification close-button{
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column wrap;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background-color: rgb(106, 90, 205);
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        user-notification close-button:hover{
+            background-color: hsl(248, 53%, 61%);
+        }
+
+        user-notification close-button:active{
+            background-color: hsl(248, 53%, 55%);
+        }
+
+        user-notification close-button svg{
+            width: 22px;
+            height: 22px;
+            display: inline-block;
+            position: relative;
+            margin: auto;
+        }
+
         @keyframes popInNotification{
             from{
                 transform: translateX(-50%) scale(0.87);
@@ -159,12 +191,14 @@
         <div>
             <button class="js-sample-1">Default Notification</button>
             <button class="js-sample-2">Interactive Notification</button>
+            <button class="js-sample-3">Closeable Notification</button>
         </div>
     </main>
     <script src="assets/Notify.js" defer="defer"></script>
     <script defer="defer">
         const sample1 = document.body.querySelector('.js-sample-1');
         const sample2 = document.body.querySelector('.js-sample-2');
+        const sample3 = document.body.querySelector('.js-sample-3');
 
         sample1.addEventListener('click', ()=>{
             new exports['Notify'].prototype.constructor({
@@ -176,11 +210,21 @@
             new exports['Notify'].prototype.constructor({
                 message: 'Sample interactive snackbar notification message',
                 duration: Infinity,
-                action: {
-                    label: 'Close',
-                    callback: ()=>{}
-                }
+                actions: [
+                    {
+                        label: 'Close',
+                        value: 'close'
+                    }
+                ]
             }); 
+        });
+
+        sample3.addEventListener('click', ()=>{
+            new exports['Notify'].prototype.constructor({
+                message: 'Closeable snackbar notification message',
+                duration: Infinity,
+                closeable: true
+            });
         });
     </script>
 </body>

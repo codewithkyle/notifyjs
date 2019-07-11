@@ -5,9 +5,11 @@ var Notify = (function () {
         var _this = this;
         this.handleAction = function (e) {
             e.preventDefault();
-            var button = document.body.querySelector('user-notification button');
-            button.removeEventListener('click', _this.handleAction);
-            _this._callback();
+            var target = e.currentTarget;
+            _this.removeEvents();
+            if (_this._callback) {
+                _this._callback(target.dataset.value);
+            }
             if ('remove' in HTMLElement.prototype) {
                 _this._notification.remove();
             }
@@ -19,19 +21,27 @@ var Notify = (function () {
             console.error('No options object provided');
             return;
         }
+        this._callback = options.callback;
         this.clearExistingNotifications();
         this.createNotification(options);
     }
     Notify.prototype.handleTimeout = function () {
-        var button = document.body.querySelector('user-notification button');
-        if (button) {
-            button.removeEventListener('click', this.handleAction);
-        }
+        this.removeEvents();
         if ('remove' in HTMLElement.prototype) {
             this._notification.remove();
         }
         else {
             this._notification.style.display = 'none !important';
+        }
+    };
+    Notify.prototype.removeEvents = function () {
+        var actionEls = Array.from(document.body.querySelectorAll('user-actions button'));
+        for (var i = 0; i < actionEls.length; i++) {
+            actionEls[i].removeEventListener('click', this.handleAction);
+        }
+        var closeEl = document.body.querySelector('user-actions close-button');
+        if (closeEl) {
+            closeEl.addEventListener('click', this.handleTimeout);
         }
     };
     Notify.prototype.clearExistingNotifications = function () {
@@ -51,11 +61,23 @@ var Notify = (function () {
         var message = document.createElement('p');
         message.innerText = options.message;
         notification.append(message);
-        if (options.action) {
-            var action = document.createElement('button');
-            action.innerText = options.action.label;
-            this._callback = options.action.callback;
-            notification.append(action);
+        var actions = document.createElement('user-actions');
+        if (options.actions) {
+            for (var i = 0; i < options.actions.length; i++) {
+                var action = document.createElement('button');
+                action.innerText = options.actions[i].label;
+                action.dataset.value = options.actions[i].value;
+                actions.append(action);
+            }
+        }
+        if (options.closeable) {
+            var action = document.createElement('close-button');
+            action.setAttribute('aria-label', 'close button');
+            action.innerHTML = Notify.CLOSE;
+            actions.append(action);
+        }
+        if (options.actions || options.closeable) {
+            notification.append(actions);
         }
         if (options.duration) {
             if (options.duration !== Infinity) {
@@ -69,20 +91,26 @@ var Notify = (function () {
                 this.timeout = setTimeout(function () { _this.handleTimeout(); }, duration);
             }
             else {
+                notification.classList.add('is-infinite');
             }
         }
         else {
             this.timeout = setTimeout(function () { _this.handleTimeout(); }, 4000);
         }
-        notification.classList.add('is-infinite');
         document.body.append(notification);
         this._notification = notification;
-        var button = document.body.querySelector('user-notification button');
-        if (button) {
-            button.addEventListener('click', this.handleAction);
-            notification.style.paddingRight = button.scrollWidth + 12 + "px";
+        var actionEls = Array.from(document.body.querySelectorAll('user-actions button'));
+        if (actionEls.length) {
+            for (var i = 0; i < actionEls.length; i++) {
+                actionEls[i].addEventListener('click', this.handleAction);
+            }
+        }
+        var closeEl = document.body.querySelector('user-actions close-button');
+        if (closeEl) {
+            closeEl.addEventListener('click', function () { _this.handleTimeout(); });
         }
     };
+    Notify.CLOSE = '<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="times" class="svg-inline--fa fa-times fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"></path></svg>';
     return Notify;
 }());
 exports.Notify = Notify;

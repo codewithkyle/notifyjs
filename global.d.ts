@@ -9,7 +9,9 @@ declare class Notify {
 declare namespace Notify{
     export interface NotifyOptions{
         message: string;
-        action?: { label:string, callback:Function },
-        duration?: number
+        actions?: Array<{ label:string, value:string }>;
+        callback?: Function;
+        duration?: number;
+        closeable?: boolean;
     }
 }
