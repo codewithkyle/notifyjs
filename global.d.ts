@@ -1,17 +1,24 @@
-export { Notify };
 
-export as namespace Notify;
 
-declare class Notify {
-    constructor(options:Notify.NotifyOptions);
+interface NotificationButton
+{
+    label: string,
+    callback: Function,
+    ariaLabel?: string,
 }
 
-declare namespace Notify{
-    export interface NotifyOptions{
-        message: string;
-        actions?: Array<{ label:string, value:string }>;
-        callback?: Function;
-        duration?: number;
-        closeable?: boolean;
-    }
+interface SnackbarNotification
+{
+    message: string,
+    duration?: number,
+    closeable?: boolean,
+    buttons?: Array<NotificationButton>,
+    position?: string,
+    element?: HTMLElement,
+}
+
+interface VerificationResponse
+{
+    validNotification: SnackbarNotification,
+    warnings: Array<string>,
 }
