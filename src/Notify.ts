@@ -178,13 +178,9 @@ export class NotificationManager
 
             if (notification.duration)
             {
-                if (notification.duration > 30)
+                if (notification.duration < 4)
                 {
-                    newNotification.duration = 30;
-                }
-                else if (notification.duration < 10)
-                {
-                    newNotification.duration = 10;
+                    newNotification.duration = 4;
                 }
                 else
                 {
