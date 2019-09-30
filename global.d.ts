@@ -1,5 +1,3 @@
-
-
 interface NotificationButton
 {
     label: string,
@@ -15,6 +13,7 @@ interface SnackbarNotification
     buttons?: Array<NotificationButton>,
     position?: string,
     element?: HTMLElement,
+    force?: boolean,
 }
 
 interface VerificationResponse

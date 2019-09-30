@@ -1,4 +1,4 @@
-class NotificationManager
+export class NotificationManager
 {
     private _queue: Array<SnackbarNotification>;
     private _callback: Function;
@@ -295,6 +295,15 @@ class NotificationManager
                 newNotification.buttons = [];
             }
 
+            if (notification.force)
+            {
+                newNotification.force = notification.force;
+            }
+            else
+            {
+                newNotification.force = false;
+            }
+
             // @ts-ignore
             resolve({ validNotification: newNotification, warnings: warnings });
         });
@@ -304,7 +313,15 @@ class NotificationManager
     {
         this.validateNotification(notification)
         .then((response:VerificationResponse) => {
-            this._queue.push(response.validNotification);
+            if (this._queue.length === 0 || !response.validNotification.force)
+            {
+                this._queue.push(response.validNotification);
+            }
+            else if (this._queue.length > 0 && response.validNotification.force)
+            {
+                this._queue.splice(1, 0, response.validNotification);
+                this.removeNotification();
+            }
             this.startCallback();
             if (response.warnings.length !== 0)
             {
@@ -319,6 +336,3 @@ class NotificationManager
         });
     }
 }
-
-// @ts-ignore
-window.notificationManager = new NotificationManager();
