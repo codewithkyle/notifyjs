@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Support for IE 11
+- Removed minimum notification duration [#2](https://github.com/codewithkyle/notifyjs/issues/2)
 
 ## [0.2.0] - 2019-09-30
 
