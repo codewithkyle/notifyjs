@@ -1,3 +1,27 @@
+interface NotificationButton
+{
+    label: string,
+    callback: Function,
+    ariaLabel?: string,
+}
+
+interface SnackbarNotification
+{
+    message: string,
+    duration?: number,
+    closeable?: boolean,
+    buttons?: Array<NotificationButton>,
+    position?: string,
+    element?: HTMLElement,
+    force?: boolean,
+}
+
+interface VerificationResponse
+{
+    validNotification: SnackbarNotification,
+    warnings: Array<string>,
+}
+
 export class NotificationManager
 {
     private _queue: Array<SnackbarNotification>;
@@ -178,14 +202,7 @@ export class NotificationManager
 
             if (notification.duration)
             {
-                if (notification.duration < 4)
-                {
-                    newNotification.duration = 4;
-                }
-                else
-                {
-                    newNotification.duration = notification.duration;
-                }
+                newNotification.duration = notification.duration;
 
                 if (notification.duration === Infinity && newNotification.closeable)
                 {
