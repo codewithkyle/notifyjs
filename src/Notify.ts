@@ -178,14 +178,7 @@ export class NotificationManager
 
             if (notification.duration)
             {
-                if (notification.duration < 4)
-                {
-                    newNotification.duration = 4;
-                }
-                else
-                {
-                    newNotification.duration = notification.duration;
-                }
+                newNotification.duration = notification.duration;
 
                 if (notification.duration === Infinity && newNotification.closeable)
                 {
