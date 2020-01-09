@@ -22,7 +22,7 @@ interface VerificationResponse
     warnings: Array<string>,
 }
 
-export class NotificationManager
+class NotificationManager
 {
     private _queue: Array<SnackbarNotification>;
     private _callback: Function;
@@ -349,3 +349,8 @@ export class NotificationManager
         });
     }
 }
+
+const globalManager = new NotificationManager();
+const notify:(notification:SnackbarNotification)=>void = globalManager.notify.bind(globalManager);
+
+export { NotificationManager, notify };

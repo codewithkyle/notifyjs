@@ -12,7 +12,7 @@ interface SnackbarNotification {
     element?: HTMLElement;
     force?: boolean;
 }
-export declare class NotificationManager {
+declare class NotificationManager {
     private _queue;
     private _callback;
     private _isRunning;
@@ -29,4 +29,5 @@ export declare class NotificationManager {
     private validateNotification;
     notify(notification: SnackbarNotification): void;
 }
-export {};
+declare const notify: (notification: SnackbarNotification) => void;
+export { NotificationManager, notify };

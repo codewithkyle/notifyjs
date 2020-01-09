@@ -1,4 +1,4 @@
-export class NotificationManager {
+class NotificationManager {
     constructor() {
         this.handleCloseClickEvent = this.removeNotification.bind(this);
         this.handleActionButtonClick = this.activateButton.bind(this);
@@ -219,4 +219,7 @@ export class NotificationManager {
         });
     }
 }
+const globalManager = new NotificationManager();
+const notify = globalManager.notify.bind(globalManager);
+export { NotificationManager, notify };
 //# sourceMappingURL=Notify.js.map

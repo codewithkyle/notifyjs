@@ -1,17 +1,15 @@
 {
   "name": "@codewithkyle/notifyjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple JavaScript library for creating and managing snackbar notifications",
   "main": "Notify.js",
   "types": "Notify.d.ts",
   "files": [
     "Notify.js",
-    "Notify.js.map",
-    "global.d.ts"
+    "Notify.js.map"
   ],
   "scripts": {
-    "compile": "tsc",
-    "preview": "http-server ./docs"
+    "compile": "tsc"
   },
   "keywords": [
     "snackbar",
@@ -22,8 +20,10 @@
   "author": "Kyle Andrews",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "^0.11.1",
     "typescript": "^3.5.2"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {}
 }
