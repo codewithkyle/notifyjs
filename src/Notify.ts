@@ -1,12 +1,10 @@
-interface NotificationButton
-{
+type NotificationButton = {
     label: string,
     callback: Function,
     ariaLabel?: string,
 }
 
-interface SnackbarNotification
-{
+type SnackbarNotification = {
     message: string,
     duration?: number,
     closeable?: boolean,
@@ -16,8 +14,7 @@ interface SnackbarNotification
     force?: boolean,
 }
 
-interface VerificationResponse
-{
+type VerificationResponse = {
     validNotification: SnackbarNotification,
     warnings: Array<string>,
 }

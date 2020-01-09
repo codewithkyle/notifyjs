@@ -1,9 +1,9 @@
-interface NotificationButton {
+declare type NotificationButton = {
     label: string;
     callback: Function;
     ariaLabel?: string;
-}
-interface SnackbarNotification {
+};
+declare type SnackbarNotification = {
     message: string;
     duration?: number;
     closeable?: boolean;
@@ -11,7 +11,7 @@ interface SnackbarNotification {
     position?: string;
     element?: HTMLElement;
     force?: boolean;
-}
+};
 declare class NotificationManager {
     private _queue;
     private _callback;
