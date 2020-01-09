@@ -20,10 +20,7 @@
   "author": "Kyle Andrews",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^3.5.2"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "typescript": "^3.7.4"
   },
   "dependencies": {}
 }
