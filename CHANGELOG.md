@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2020-01-09
+
+### Fixed
+
+- updated type declarations
+
 ## [1.0.2] - 2020-01-09
 
 ### Added
@@ -52,7 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Entire existing codebase due to rewrite
 
-[Unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/codewithkyle/notifyjs/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/codewithkyle/notifyjs/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/codewithkyle/notifyjs/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/codewithkyle/notifyjs/compare/v0.2.0...v1.0.0
