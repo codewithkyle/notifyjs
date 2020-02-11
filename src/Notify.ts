@@ -10,8 +10,10 @@ const notify:(notification:{
         label: string,
         callback: Function,
         ariaLabel?: string,
+        classes?: Array<string>|string,
     }>,
     force?: boolean,
+    classes?: Array<string>|string,
 })=>void = globalManager.notify.bind(globalManager);
 
 export { NotificationManager, notify };

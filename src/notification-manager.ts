@@ -2,6 +2,7 @@ type NotificationButton = {
     label: string,
     callback: Function,
     ariaLabel?: string,
+    classes?: Array<string>|string,
 }
 
 type SnackbarNotification = {
@@ -12,6 +13,7 @@ type SnackbarNotification = {
     position?: string,
     element?: HTMLElement,
     force?: boolean,
+    classes?: Array<string>|string,
 }
 
 type VerificationResponse = {
@@ -48,7 +50,13 @@ export class NotificationManager
     private createNotification(notification:SnackbarNotification) : void
     {
         const el = document.createElement('snackbar-component');
+
+        /** @deprecated */
         el.setAttribute('position', notification.position);
+
+        for (let i = 0; i < notification.classes.length; i++){
+            el.classList.add(notification.classes[i]);
+        }
         
         const message = document.createElement('p');
         message.innerText = notification.message;
@@ -213,6 +221,7 @@ export class NotificationManager
 
             if (notification.position)
             {
+                warnings.push('The position property is deprecated');
                 if (notification.position.match('top'))
                 {
                     newNotification.position = 'top';
@@ -314,6 +323,19 @@ export class NotificationManager
                 newNotification.force = false;
             }
 
+            if (notification.classes)
+            {
+                if (typeof notification.classes === 'string'){
+                    newNotification.classes = [notification.classes];
+                }else if (Array.isArray(notification.classes)){
+                    newNotification.classes = notification.classes;
+                }else{
+                    reject('Notification classes must be a string or an array of strings.');
+                }
+            }else{
+                newNotification.classes = [];
+            }
+
             // @ts-ignore
             resolve({ validNotification: newNotification, warnings: warnings });
         });
@@ -337,7 +359,7 @@ export class NotificationManager
             {
                 for (let i = 0; i < response.warnings.length; i++)
                 {
-                    console.warn(response.warnings[i]);
+                    console.warn(`NotifyJS: ${response.warnings[i]}`);
                 }
             }
         })
