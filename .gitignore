@@ -1,1 +1,10 @@
 node_modules
+
+# Compiled files
+# -----------
+notification-manager.d.ts
+notification-manager.js
+notification-manager.js.map
+notify.d.ts
+notify.js
+notify.js.map
