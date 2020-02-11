@@ -13,7 +13,8 @@
     "notification-manager.d.ts"
   ],
   "scripts": {
-    "compile": "tsc"
+    "compile": "tsc",
+    "test": "serve ./test"
   },
   "keywords": [
     "snackbar",
@@ -23,6 +24,7 @@
   "author": "Kyle Andrews",
   "license": "MIT",
   "devDependencies": {
+    "serve": "^11.3.0",
     "typescript": "^3.7.4"
   },
   "publishConfig": {

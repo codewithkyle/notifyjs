@@ -1,0 +1,181 @@
+snackbar-component {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    border-radius: 0.25rem;
+    background-color: #333;
+    box-shadow: 0 3px 5px -1px rgba(51, 51, 51, 0.15), 0 6px 10px 0 rgba(51, 51, 51, 0.15), 0 1px 18px 0 rgba(51, 51, 51, 0.15);
+    color: rgba(255, 255, 255, 0.87);
+    min-width: 350px;
+    max-width: 90vw;
+    transform: scale(0.87);
+    opacity: 0;
+    z-index: 1000;
+    transform-origin: center;
+    animation: notificationPop 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+snackbar-component[position][position~="bottom"] {
+    bottom: 1rem;
+}
+
+snackbar-component[position][position~="top"] {
+    top: 1rem;
+}
+
+snackbar-component[position][position~="center"] {
+    left: 50%;
+    transform: translate(-50%) scale(0.87);
+    transform-origin: left center;
+    animation: notificationPopCenter 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+snackbar-component[position][position~="left"] {
+    left: 1.5rem;
+}
+
+snackbar-component[position][position~="right"] {
+    right: 1.5rem;
+}
+
+snackbar-component p {
+    padding: 0.875rem 1rem;
+    line-height: 1.618;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+snackbar-component snackbar-actions {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+}
+
+snackbar-component snackbar-actions button {
+    user-select: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 0.5rem;
+    color: #4a99ff;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+snackbar-component snackbar-actions button:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+snackbar-component snackbar-actions button:hover::before {
+    transform: scale(1);
+    background-color: rgba(74, 153, 255, 0.15);
+    transition: transform 175ms cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 75ms ease;
+}
+
+snackbar-component snackbar-actions button:active::before {
+    background-color: rgba(74, 153, 255, 0.3);
+    transition: background-color 75ms ease-in-out;
+}
+
+snackbar-component snackbar-actions button::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    transform-origin: center;
+    transform: scale(0.3);
+    transition: all 75ms ease-out;
+}
+
+snackbar-component snackbar-actions close-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+    user-select: none;
+    transition: color 75ms ease-in-out;
+    position: relative;
+}
+
+snackbar-component snackbar-actions close-button:hover {
+    color: #fff;
+}
+
+snackbar-component snackbar-actions close-button:hover::before {
+    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: transform 175ms cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 75ms ease;
+}
+
+snackbar-component snackbar-actions close-button:active {
+    color: #fff;
+}
+
+snackbar-component snackbar-actions close-button:active::before {
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: background-color 75ms ease-in-out;
+}
+
+snackbar-component snackbar-actions close-button svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 0;
+}
+
+snackbar-component snackbar-actions close-button::before {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    content: "";
+    border-radius: 50%;
+    background-color: transparent;
+    transform-origin: center;
+    transform: scale(0.3);
+    transition: all 75ms ease-out;
+}
+
+@keyframes notificationPopCenter {
+    from {
+        opacity: 0;
+        transform: scale(0.87) translateX(-50%);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateX(-50%);
+    }
+}
+
+@keyframes notificationPop {
+    from {
+        opacity: 0;
+        transform: scale(0.87);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
