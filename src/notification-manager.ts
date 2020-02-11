@@ -73,6 +73,10 @@ export class NotificationManager
                     const button = document.createElement('button');
                     button.innerText = notification.buttons[i].label;
                     button.dataset.index = `${ i }`;
+
+                    for (let k = 0; k < notification.buttons[i].classes.length; k++){
+                        button.classList.add(notification.buttons[i].classes[k]);
+                    }
                     
                     if (notification.buttons[i].ariaLabel)
                     {
@@ -294,6 +298,19 @@ export class NotificationManager
                     if (notification.buttons[i].ariaLabel)
                     {
                         button.ariaLabel = notification.buttons[i].ariaLabel;
+                    }
+
+                    if (notification.buttons[i].classes){
+                        if (typeof notification.buttons[i].classes === 'string'){
+                            // @ts-ignore
+                            button.classes = [notification.buttons[i].classes];
+                        }else if (Array.isArray(notification.buttons[i].classes)){
+                            button.classes = notification.buttons[i].classes;
+                        }else{
+                            reject('Notification classes must be a string or an array of strings.');
+                        }
+                    }else{
+                        button.classes = [];
                     }
 
                     warnings = [...warnings, ...newWarnings];
