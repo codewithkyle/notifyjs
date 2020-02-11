@@ -10,41 +10,74 @@ Download Notify.js via NPM:
 npm i --save @codewithkyle/notifyjs
 ```
 
-Once the package is installed import the package:
+## Usage
+
+There are two ways to use this package. You can create a Notification Manager or use the global manager. Each manager has a queue and new notifications are placed in the queue in the order that they're requested. The queue can be skipped by settings the `force` value to true.
+
+### Global Manager
+
+Import the global `notify()` function:
+
+```typescript
+import { notify } from "@codewithkyle/notifyjs";
+```
+
+Submit a notification to the global manager:
+
+```typescript
+notify({
+    message: "All notifications require a message",
+});
+```
+
+### Custom Manager
+
+Import the `NotificationManager` class:
 
 ```typescript
 import { NotificationManager } from "@codewithkyle/notifyjs";
 ```
 
-Then it's as simple as creating a new instance of the class and calling the `notify()` method:
+Create a new instance of the class:
 
 ```typescript
-const notificationManager = new NotificationManager();
-notificationManager.notify({
-    message: "All notifications require a message",
-});
+const customManager = new NotificationManager();
 ```
 
-Notifications are queued and displayed in the order that they were requested. The queue can be skipped by settings the `force` flag to true.
+Call the `notify()` method:
 
 ```typescript
-notificationManager.notify({
-    message: "This message will close the current notification and will jump the queue",
-    force: true,
+customManager.notify({
+    message: "All notifications require a message",
 });
 ```
 
 ## Notification Options
 
+```typescript
+interface NotificationOptions {
+    message: string;
+    duration?: number;
+    closeable?: boolean;
+    buttons?: Array<{
+        label: string;
+        callback: Function;
+        ariaLabel?: string;
+        classes?: Array<string> | string;
+    }>;
+    force?: boolean;
+    classes?: Array<string> | string;
+}
+```
+
 ### Duration
 
-Notify.js allows custom notification duration. The minimum time allowed is 4 seconds. When creating a notification that has an interaction the `Infinity` value can be provided to the timer if you want the notification to stick until the user interacts with it.
+The duration value can be set to `Infinity` if a users interaction is required. Otherwise enter the number of seconds the notification should be displayed for.
 
 ```typescript
-notificationManager.notify({
-    message: "The user will have to close this notification",
-    duration: Infinity,
-    closeable: true,
+notify({
+    message: "This notification will last 3 seconds",
+    duration: 3,
 });
 ```
 
@@ -53,10 +86,8 @@ notificationManager.notify({
 Notify.js also allows for user interactions via a button element. The action requires a custom label for the button along with a callback function that will be called when the `click` event is fired on the button.
 
 ```typescript
-notificationManager.notify({
+notify({
     message: "A new version of this application is available",
-    duration: Infinity,
-    closeable: true,
     buttons: [
         {
             label: "Update",
@@ -65,6 +96,17 @@ notificationManager.notify({
             },
         },
     ],
+});
+```
+
+### Closeable
+
+Notifications can be closeable by setting the `closeable` value to true.
+
+```typescript
+notify({
+    message: "The user will have to close this notification",
+    closeable: true,
 });
 ```
 
