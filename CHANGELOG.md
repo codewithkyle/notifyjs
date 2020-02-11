@@ -7,62 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-02-11
+
 ### Added
 
-- support for applying custom classes [#6](https://github.com/codewithkyle/notifyjs/issues/6)
+-   support for applying dynamic notificaiton classes [#6](https://github.com/codewithkyle/notifyjs/issues/6)
+-   support for dynamic button classes
+-   testing
+-   generic material design based CSS stylesheet
+
+### Deprecated
+
+-   notifications `position` value
+-   notifications `element` value
 
 ## [1.0.3] - 2020-01-09
 
 ### Fixed
 
-- updated type declarations
+-   updated type declarations
 
 ## [1.0.2] - 2020-01-09
 
 ### Added
 
-- `Notify.d.ts` declaration file to the `files` array in `package.json`
+-   `Notify.d.ts` declaration file to the `files` array in `package.json`
 
 ## [1.0.1] - 2020-01-09
 
 ### Added
 
-- new `notify` export providing access to a global notification manager
+-   new `notify` export providing access to a global notification manager
 
 ### Removed
 
-- [http-server](https://www.npmjs.com/package/http-server) dev dependency
+-   [http-server](https://www.npmjs.com/package/http-server) dev dependency
 
 ## [1.0.0] - 2019-12-15
 
 ### Added
 
-- TypeScript declaration file for `Notify.js`
+-   TypeScript declaration file for `Notify.js`
 
 ### Changed
 
-- Updated to ES2019
+-   Updated to ES2019
 
 ### Removed
 
-- Support for IE 11
-- Removed minimum notification duration [#2](https://github.com/codewithkyle/notifyjs/issues/2)
+-   Support for IE 11
+-   Removed minimum notification duration [#2](https://github.com/codewithkyle/notifyjs/issues/2)
 
 ## [0.2.0] - 2019-09-30
 
 ### Added
 
-- Reworked library to use `window.requestAnimationFrame` instead of `setTimeout` in order to increase performance
-- Notifications are queued and will be displayed in the order they're submitted
-- Added positioning information/values
-- Updated HTML structure to allow for more robust layouts/designs
-- Removed the 10 second maximum notification duration
+-   Reworked library to use `window.requestAnimationFrame` instead of `setTimeout` in order to increase performance
+-   Notifications are queued and will be displayed in the order they're submitted
+-   Added positioning information/values
+-   Updated HTML structure to allow for more robust layouts/designs
+-   Removed the 10 second maximum notification duration
 
 ### Removed
 
-- Entire existing codebase due to rewrite
+-   Entire existing codebase due to rewrite
 
-[Unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.0.3...HEAD
+[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/codewithkyle/notifyjs/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/codewithkyle/notifyjs/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/codewithkyle/notifyjs/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/codewithkyle/notifyjs/compare/v1.0.0...v1.0.1

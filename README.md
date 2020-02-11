@@ -13,7 +13,7 @@ npm i --save @codewithkyle/notifyjs
 Once the package is installed import the package:
 
 ```typescript
-import { NotificationManager } from '@codewithkyle/notifyjs';
+import { NotificationManager } from "@codewithkyle/notifyjs";
 ```
 
 Then it's as simple as creating a new instance of the class and calling the `notify()` method:
@@ -21,7 +21,7 @@ Then it's as simple as creating a new instance of the class and calling the `not
 ```typescript
 const notificationManager = new NotificationManager();
 notificationManager.notify({
-    message: 'All notifications require a message',
+    message: "All notifications require a message",
 });
 ```
 
@@ -29,7 +29,7 @@ Notifications are queued and displayed in the order that they were requested. Th
 
 ```typescript
 notificationManager.notify({
-    message: 'This message will close the current notification and will jump the queue',
+    message: "This message will close the current notification and will jump the queue",
     force: true,
 });
 ```
@@ -42,7 +42,7 @@ Notify.js allows custom notification duration. The minimum time allowed is 4 sec
 
 ```typescript
 notificationManager.notify({
-    message: 'The user will have to close this notification',
+    message: "The user will have to close this notification",
     duration: Infinity,
     closeable: true,
 });
@@ -54,21 +54,21 @@ Notify.js also allows for user interactions via a button element. The action req
 
 ```typescript
 notificationManager.notify({
-    message: 'A new version of this application is available',
+    message: "A new version of this application is available",
     duration: Infinity,
     closeable: true,
     buttons: [
         {
-            label: 'Update',
-            callback: () => { console.log('User clicked the update button') },
-        }
+            label: "Update",
+            callback: () => {
+                console.log("User clicked the update button");
+            },
+        },
     ],
 });
 ```
 
 ## HTML Structure
-
-The notification element is composed of the following HTML. This library doesn't provide/force any CSS, for a material design styled snackbar notification [click here](https://components.codewithkyle.com/snackbars/dark-snackbar).
 
 ```html
 <snackbar-component>
@@ -81,3 +81,7 @@ The notification element is composed of the following HTML. This library doesn't
     </snackbar-actions>
 </snackbar-component>
 ```
+
+## Stylesheets
+
+This library doesn't provide/force any CSS, for a material design styled snackbar notification [click here](https://github.com/codewithkyle/notifyjs/blob/master/test/snackbar.css).
