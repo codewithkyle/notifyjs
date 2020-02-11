@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- support for applying custom classes [#6](https://github.com/codewithkyle/notifyjs/issues/6)
+
 ## [1.0.3] - 2020-01-09
 
 ### Fixed

@@ -2,12 +2,12 @@
   "name": "@codewithkyle/notifyjs",
   "version": "1.0.3",
   "description": "A simple JavaScript library for creating and managing snackbar notifications",
-  "main": "Notify.js",
-  "types": "Notify.d.ts",
+  "main": "notify.js",
+  "types": "notify.d.ts",
   "files": [
-    "Notify.js",
-    "Notify.js.map",
-    "Notify.d.ts"
+    "notify.js",
+    "notify.js.map",
+    "notify.d.ts"
   ],
   "scripts": {
     "compile": "tsc"
