@@ -16,4 +16,14 @@ const notify: (notification: {
     classes?: Array<string> | string;
 }) => void = globalManager.notify.bind(globalManager);
 
-export { NotificationManager, notify };
+const toast: (notification: {
+    title: string;
+    message: string;
+    closeable?: boolean;
+    icon?: string;
+    duration?: number;
+    classes?: string[];
+    element?: HTMLElement;
+}) => void = globalManager.toast.bind(globalManager);
+
+export { NotificationManager, notify, toast };

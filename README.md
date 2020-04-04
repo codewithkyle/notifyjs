@@ -52,7 +52,7 @@ customManager.notify({
 });
 ```
 
-## Notification Options
+## Snackbar Notification
 
 ```typescript
 interface NotificationOptions {
@@ -110,7 +110,7 @@ notify({
 });
 ```
 
-## HTML Structure
+### HTML Structure
 
 ```html
 <snackbar-component>
@@ -122,6 +122,38 @@ notify({
         </close-button>
     </snackbar-actions>
 </snackbar-component>
+```
+
+## Toast Notification
+
+```typescript
+type ToasterNotification = {
+    title: string;
+    message: string;
+    closeable?: boolean;
+    icon?: string; // svg
+    duration?: number; // in seconds
+    classes?: string[];
+};
+```
+
+### HTML Structure
+
+```html
+<toaster-component>
+    <toast-component>
+        <i>
+            <svg />
+        </i>
+        <copy-wrapper>
+            <h3>Title</h3>
+            <p>Custom notification message</p>
+        </copy-wrapper>
+        <button>
+            <svg />
+        </button>
+    </toast-component>
+</toaster-component>
 ```
 
 ## Stylesheets

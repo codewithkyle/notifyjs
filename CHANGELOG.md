@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2020-04-04
+
+### Added
+
+-   toaster notification `toast()` creation
+
 ## [1.1.0] - 2020-02-11
 
 ### Added
@@ -72,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Entire existing codebase due to rewrite
 
-[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/codewithkyle/notifyjs/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/codewithkyle/notifyjs/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/codewithkyle/notifyjs/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/codewithkyle/notifyjs/compare/v1.0.1...v1.0.2
