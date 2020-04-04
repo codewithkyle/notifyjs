@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   toaster notification `toast()` creation
+-   toaster notification `toast()` creation [#5](https://github.com/codewithkyle/notifyjs/issues/5)
+-   renames existing notification funciton to `snackbar()`
 
 ## [1.1.0] - 2020-02-11
 

@@ -333,6 +333,8 @@ export class NotificationManager {
             });
     }
 
+    public snackbar = this.notify;
+
     private removeToasterNotification(notification: ToasterNotification, id: number) {
         notification.element.remove();
         this.toaster.splice(id, 1);
