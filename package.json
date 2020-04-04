@@ -1,7 +1,7 @@
 {
     "name": "@codewithkyle/notifyjs",
-    "version": "1.1.0",
-    "description": "A simple JavaScript library for creating and managing snackbar notifications",
+    "version": "1.2.0",
+    "description": "A simple JavaScript library for creating and managing toaster & snackbar notifications",
     "main": "notify.js",
     "types": "notify.d.ts",
     "files": [
@@ -25,10 +25,7 @@
     "license": "MIT",
     "devDependencies": {
         "serve": "^11.3.0",
-        "typescript": "^3.7.4"
-    },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com/"
+        "typescript": "^3.8.3"
     },
     "dependencies": {}
 }
