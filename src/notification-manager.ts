@@ -145,7 +145,7 @@ export class NotificationManager {
                 for (let i = 0; i < this.toaster.length; i++) {
                     this.toaster[i].duration -= deltaTime;
                     if (this.toaster[i].duration <= 0) {
-                        this.removeToasterNotification(this.toaster[i], i);
+                        this.removeToasterNotification(i);
                     }
                 }
             }
@@ -335,14 +335,23 @@ export class NotificationManager {
 
     public snackbar = this.notify;
 
-    private removeToasterNotification(notification: ToasterNotification, id: number) {
-        notification.element.remove();
-        this.toaster.splice(id, 1);
+    private removeToasterNotification(index: number) {
+        this.toaster[index].element.remove();
+        this.toaster.splice(index, 1);
     }
     private handleToastClose: EventListener = (e: Event) => {
         const target = e.currentTarget as HTMLButtonElement;
-        const id = parseInt(target.parentElement.dataset.id);
-        this.removeToasterNotification(this.toaster[id], id);
+        const notificationId = target.parentElement.dataset.id;
+        let index = null;
+        for (let i = 0; i < this.toaster.length; i++) {
+            if (this.toaster[i].element.dataset.id === notificationId) {
+                index = i;
+                break;
+            }
+        }
+        if (index) {
+            this.removeToasterNotification(index);
+        }
     };
 
     private createToast(notification: ToasterNotification) {
@@ -387,7 +396,7 @@ export class NotificationManager {
         }
 
         const notificationEl = this.createToast(notification);
-        notificationEl.dataset.id = `${this.toaster.length}`;
+        notificationEl.dataset.id = `${performance.now()}`;
         notification.element = notificationEl;
 
         if (notification?.duration && !isNaN(notification.duration)) {
