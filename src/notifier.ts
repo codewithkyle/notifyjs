@@ -1,5 +1,6 @@
-import { SnackbarComponent } from "./snackbar-component";
 import { SnackbarNotification, ToasterNotification, NotificationButton } from "./types";
+import { SnackbarComponent } from "./snackbar-component";
+import { ToastComponent } from "./toast-component";
 
 export class Notifier {
     private snackbarQueue: Array<SnackbarNotification>;
@@ -54,7 +55,7 @@ export class Notifier {
     public snackbar(settings: Partial<SnackbarNotification>) {
         const snackbar: Partial<SnackbarNotification> = {};
 
-        if (!settings?.message && settings?.message?.length !== 0) {
+        if (!settings?.message || settings?.message?.length === 0) {
             console.error("Snackbar notificaitons require a message");
             return;
         }
@@ -107,5 +108,53 @@ export class Notifier {
         } else {
             this.snackbarQueue.push(snackbar as SnackbarNotification);
         }
+    }
+
+    public toast(settings: Partial<ToasterNotification>) {
+        const toast: Partial<ToasterNotification> = {};
+
+        if (!settings?.message || settings?.message?.length === 0) {
+            console.error("Toast notificaitons require a message");
+            return;
+        } else if (!settings?.title || settings?.title?.length === 0) {
+            console.error("Toast notificaitons require a title");
+            return;
+        }
+
+        toast.title = settings.title;
+        toast.message = settings.message;
+        toast.uid = this.uid();
+
+        let classes: Array<string> = [];
+        if (settings?.classes) {
+            if (Array.isArray(settings.classes)) {
+                classes = settings.classes;
+            } else {
+                classes = [settings.classes];
+            }
+        }
+        toast.classes = classes;
+
+        if (typeof settings?.duration === "number" || settings?.duration === Infinity) {
+            toast.duration = settings.duration;
+        } else {
+            toast.duration = 3;
+        }
+
+        if (typeof settings?.closeable !== "undefined" && typeof settings?.closeable === "boolean") {
+            toast.closeable = settings.closeable;
+        } else {
+            toast.closeable = true;
+        }
+
+        if (settings?.icon && typeof settings?.icon === "string") {
+            toast.icon = settings.icon;
+        } else {
+            toast.icon = null;
+        }
+
+        toast.el = new ToastComponent(toast as ToasterNotification);
+        this.toaster.push(toast as ToasterNotification);
+        document.body.appendChild(toast.el);
     }
 }

@@ -13,7 +13,10 @@
         "notifier.d.ts",
         "snackbar-component.js",
         "snackbar-component.js.map",
-        "snackbar-component.d.ts"
+        "snackbar-component.d.ts",
+        "toast-component.js",
+        "toast-component.js.map",
+        "toast-component.d.ts"
     ],
     "scripts": {
         "compile": "tsc",
@@ -22,6 +25,8 @@
     "keywords": [
         "snackbar",
         "notification",
+        "toaster",
+        "web-components",
         "lightweight"
     ],
     "author": "Kyle Andrews",
