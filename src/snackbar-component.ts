@@ -19,6 +19,8 @@ export class SnackbarComponent extends HTMLElement {
     };
 
     private render() {
+        this.dataset.uid = this.settings.uid;
+
         for (let i = 0; i < this.settings.classes.length; i++) {
             this.classList.add(this.settings.classes[i]);
         }
