@@ -8,9 +8,12 @@
         "notify.js",
         "notify.js.map",
         "notify.d.ts",
-        "notification-manager.js",
-        "notification-manager.js.map",
-        "notification-manager.d.ts"
+        "notifier.js",
+        "notifier.js.map",
+        "notifier.d.ts",
+        "snackbar-component.js",
+        "snackbar-component.js.map",
+        "snackbar-component.d.ts"
     ],
     "scripts": {
         "compile": "tsc",

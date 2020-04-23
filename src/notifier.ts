@@ -1,5 +1,5 @@
 import { SnackbarComponent } from "./snackbar-component";
-import { SnackbarNotification, ToasterNotification, NotificationButton } from "./notify";
+import { SnackbarNotification, ToasterNotification, NotificationButton } from "./types";
 
 export class Notifier {
     private snackbarQueue: Array<SnackbarNotification>;
@@ -37,6 +37,7 @@ export class Notifier {
             if (this.snackbarQueue.length) {
                 if (!this.snackbarQueue[0].el) {
                     this.snackbarQueue[0].el = new SnackbarComponent(this.snackbarQueue[0]);
+                    document.body.appendChild(this.snackbarQueue[0].el);
                 }
                 if (this.snackbarQueue[0]?.duration && this.snackbarQueue[0]?.duration !== Infinity) {
                     this.snackbarQueue[0].duration -= deltaTime;
