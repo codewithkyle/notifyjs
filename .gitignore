@@ -9,3 +9,4 @@ notification-manager.js.map
 notify.d.ts
 notify.js
 notify.js.map
+!/src/notify.d.ts
