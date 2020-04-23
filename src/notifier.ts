@@ -101,6 +101,23 @@ export class Notifier {
             }
         }
         snackbar.buttons = buttons;
+        for (let i = 0; i < snackbar.buttons.length; i++) {
+            if (snackbar.buttons[i]?.classes && !Array.isArray(snackbar.buttons[i]?.classes)) {
+                // @ts-ignore
+                snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
+            }
+            if (!snackbar.buttons[i]?.ariaLabel) {
+                snackbar.buttons[i].ariaLabel = null;
+            }
+            if (!snackbar.buttons[i]?.label || snackbar.buttons[i]?.label.length === 0) {
+                console.error("Snackbar buttons require a label");
+                snackbar.buttons[i].label = "Missing label";
+            }
+            if (!snackbar.buttons[i]?.callback) {
+                console.error("Snackbar buttons require a callback function");
+                snackbar.buttons[i].callback = () => {};
+            }
+        }
 
         if (snackbar.force && this.snackbarQueue.length) {
             this.snackbarQueue[0].el.remove();
