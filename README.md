@@ -1,6 +1,6 @@
 # Notify.js
 
-Notify.js is a utility library helping to manage simple [snackbar notifications](https://material.io/develop/web/components/snackbars/). Checkout the [live demo](https://components.codewithkyle.com/snackbars/dark-snackbar) to see the library in action.
+Notify.js is a hyper-lightweight utility library helping to manage simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
 
 ## Installation
 
@@ -14,41 +14,44 @@ npm i --save @codewithkyle/notifyjs
 
 There are two ways to use this package. You can create a Notification Manager or use the global manager. Each manager has a queue and new notifications are placed in the queue in the order that they're requested. The queue can be skipped by settings the `force` value to true.
 
-### Global Manager
+### Notification Manager
 
-Import the global `notify()` function:
+Import the manager:
 
 ```typescript
-import { notify } from "@codewithkyle/notifyjs";
+import { Notifier } from "@codewithkyle/notifyjs";
+const notifier = new Notifier();
 ```
 
-Submit a notification to the global manager:
+Create a snackbar or toast notification:
 
 ```typescript
-notify({
-    message: "All notifications require a message",
+notifier.snackbar({
+    message: "All snackbar notifications require a message",
+});
+notifier.toast({
+    title: "Toast notificaitons require a title",
+    message: "And they require a message",
 });
 ```
 
-### Custom Manager
+### Global Manager
 
-Import the `NotificationManager` class:
+Import the notification type:
 
 ```typescript
-import { NotificationManager } from "@codewithkyle/notifyjs";
+import { snackbar, toast } from "@codewithkyle/notifyjs";
 ```
 
-Create a new instance of the class:
+Create a notification:
 
 ```typescript
-const customManager = new NotificationManager();
-```
-
-Call the `notify()` method:
-
-```typescript
-customManager.notify({
-    message: "All notifications require a message",
+notifier.snackbar({
+    message: "All snackbar notifications require a message",
+});
+notifier.toast({
+    title: "Toast notificaitons require a title",
+    message: "And they require a message",
 });
 ```
 
@@ -57,7 +60,7 @@ customManager.notify({
 ```typescript
 interface NotificationOptions {
     message: string;
-    duration?: number;
+    duration?: number; // in seconds
     closeable?: boolean;
     buttons?: Array<{
         label: string;
@@ -68,17 +71,6 @@ interface NotificationOptions {
     force?: boolean;
     classes?: Array<string> | string;
 }
-```
-
-### Duration
-
-The duration value can be set to `Infinity` if a users interaction is required. Otherwise enter the number of seconds the notification should be displayed for.
-
-```typescript
-notify({
-    message: "This notification will last 3 seconds",
-    duration: 3,
-});
 ```
 
 ### User Interaction
@@ -96,17 +88,6 @@ notify({
             },
         },
     ],
-});
-```
-
-### Closeable
-
-Notifications can be closeable by setting the `closeable` value to true.
-
-```typescript
-notify({
-    message: "The user will have to close this notification",
-    closeable: true,
 });
 ```
 
@@ -131,7 +112,7 @@ type ToasterNotification = {
     title: string;
     message: string;
     closeable?: boolean;
-    icon?: string; // svg
+    icon?: string; // svg or img
     duration?: number; // in seconds
     classes?: string[];
 };
@@ -155,7 +136,3 @@ type ToasterNotification = {
     </toast-component>
 </toaster-component>
 ```
-
-## Stylesheets
-
-This library doesn't provide/force any CSS, for a material design styled snackbar notification [click here](https://github.com/codewithkyle/notifyjs/blob/master/test/snackbar.css).

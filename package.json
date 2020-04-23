@@ -1,6 +1,6 @@
 {
     "name": "@codewithkyle/notifyjs",
-    "version": "1.2.2",
+    "version": "2.0.0",
     "description": "A simple JavaScript library for creating and managing toaster & snackbar notifications",
     "main": "notify.js",
     "types": "notify.d.ts",
@@ -8,9 +8,15 @@
         "notify.js",
         "notify.js.map",
         "notify.d.ts",
-        "notification-manager.js",
-        "notification-manager.js.map",
-        "notification-manager.d.ts"
+        "notifier.js",
+        "notifier.js.map",
+        "notifier.d.ts",
+        "snackbar-component.js",
+        "snackbar-component.js.map",
+        "snackbar-component.d.ts",
+        "toast-component.js",
+        "toast-component.js.map",
+        "toast-component.d.ts"
     ],
     "scripts": {
         "compile": "tsc",
@@ -19,6 +25,8 @@
     "keywords": [
         "snackbar",
         "notification",
+        "toaster",
+        "web-components",
         "lightweight"
     ],
     "author": "Kyle Andrews",

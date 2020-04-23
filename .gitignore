@@ -3,9 +3,15 @@ node_modules
 
 # Compiled files
 # -----------
-notification-manager.d.ts
-notification-manager.js
-notification-manager.js.map
-notify.d.ts
 notify.js
 notify.js.map
+notify.d.ts
+notifier.js
+notifier.js.map
+notifier.d.ts
+snackbar-component.js
+snackbar-component.js.map
+snackbar-component.d.ts
+toast-component.js
+toast-component.js.map
+toast-component.d.ts
