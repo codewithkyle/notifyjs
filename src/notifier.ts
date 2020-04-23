@@ -155,6 +155,18 @@ export class Notifier {
 
         toast.el = new ToastComponent(toast as ToasterNotification);
         this.toaster.push(toast as ToasterNotification);
-        document.body.appendChild(toast.el);
+
+        let shell = document.body.querySelector("toaster-component") || null;
+        if (!shell) {
+            shell = document.createElement("toaster-component");
+            document.body.appendChild(shell);
+        }
+
+        const lastSlice = shell.querySelector("toast-component") || null;
+        if (!lastSlice) {
+            shell.insertBefore(toast.el, lastSlice);
+        } else {
+            shell.appendChild(toast.el);
+        }
     }
 }
