@@ -9,7 +9,6 @@
         "target": "ES2019",
         "module": "ESNext",
         "moduleResolution": "node",
-        "declaration": true,
         "lib": ["DOM", "ES2019"]
     },
     "exclude": ["./node_modules"],
