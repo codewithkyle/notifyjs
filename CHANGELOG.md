@@ -7,9 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   typescript declaration files
+-   toast injection
+
+## [2.0.0] - 2020-04-23
+
 ### Added
 
 -   refactored elements into web components
+-   renamed `NotificationManager()` to `Notifier()`
+
+### Fixed
+
+-   toast components use `node.inserBefore()` instead of forcing the `column-reverse` CSS property to render in the correct order
+
+### Removed
+
+-   deprecated `position` value
+-   `notify()` export -- replaced with `snackbar()`
 
 ## [1.2.2] - 2020-04-17
 
@@ -90,7 +107,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Entire existing codebase due to rewrite
 
-[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/codewithkyle/notifyjs/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/codewithkyle/notifyjs/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/codewithkyle/notifyjs/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/codewithkyle/notifyjs/compare/v1.0.2...v1.0.3

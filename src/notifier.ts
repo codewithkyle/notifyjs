@@ -180,7 +180,7 @@ export class Notifier {
         }
 
         const lastSlice = shell.querySelector("toast-component") || null;
-        if (!lastSlice) {
+        if (lastSlice) {
             shell.insertBefore(toast.el, lastSlice);
         } else {
             shell.appendChild(toast.el);
