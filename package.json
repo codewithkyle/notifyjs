@@ -1,6 +1,6 @@
 {
     "name": "@codewithkyle/notifyjs",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "A simple JavaScript library for creating and managing toaster & snackbar notifications",
     "main": "notify.js",
     "files": [
