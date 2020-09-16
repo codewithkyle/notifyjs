@@ -102,9 +102,15 @@ export class Notifier {
         }
         snackbar.buttons = buttons;
         for (let i = 0; i < snackbar.buttons.length; i++) {
-            if (snackbar.buttons[i]?.classes && !Array.isArray(snackbar.buttons[i]?.classes)) {
-                // @ts-ignore
-                snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
+            if (snackbar.buttons[i]?.classes) {
+                if (!Array.isArray(snackbar.buttons[i].classes)) {
+                    // @ts-ignore
+                    snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
+                } else {
+                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
+                }
+            } else {
+                snackbar.buttons[i].classes = [];
             }
             if (!snackbar.buttons[i]?.ariaLabel) {
                 snackbar.buttons[i].ariaLabel = null;
