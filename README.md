@@ -67,9 +67,11 @@ interface NotificationOptions {
         callback: Function;
         ariaLabel?: string;
         classes?: Array<string> | string;
+        autofocus?: boolean;
     }>;
     force?: boolean;
     classes?: Array<string> | string;
+    autofocus?: boolean;
 }
 ```
 
@@ -115,6 +117,14 @@ type ToasterNotification = {
     icon?: string; // svg or img
     duration?: number; // in seconds
     classes?: string[];
+    autofocus?: boolean;
+    buttons?: Array<{
+        label: string;
+        callback: Function;
+        ariaLabel?: string;
+        classes?: Array<string> | string;
+        autofocus?: boolean;
+    }>;
 };
 ```
 
@@ -129,6 +139,9 @@ type ToasterNotification = {
         <copy-wrapper>
             <h3>Title</h3>
             <p>Custom notification message</p>
+            <toast-actions>
+                <button>Action</button>
+            </toast-actions>
         </copy-wrapper>
         <button>
             <svg />

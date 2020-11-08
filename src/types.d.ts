@@ -28,4 +28,5 @@ export type ToasterNotification = {
     uid: string;
     el: HTMLElement;
     autofocus?: boolean;
+    buttons?: Array<NotificationButton>;
 };

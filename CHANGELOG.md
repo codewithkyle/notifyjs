@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ability to autofocus buttons ([#14](https://github.com/codewithkyle/notifyjs/issues/14))
 - CDN compatible version
 - role attributes to snackbar and toast notifications
+- toast notificaitons can contain buttons ([#15](https://github.com/codewithkyle/notifyjs/issues/15))
 
 ### Fixed
 

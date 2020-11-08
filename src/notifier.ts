@@ -193,6 +193,44 @@ export class Notifier {
             toast.autofocus = false;
         }
 
+        let buttons: Array<NotificationButton> = [];
+        if (settings?.buttons) {
+            if (Array.isArray(settings.buttons)) {
+                buttons = settings.buttons;
+            } else {
+                buttons = [settings.buttons];
+            }
+        }
+        toast.buttons = buttons;
+        for (let i = 0; i < toast.buttons.length; i++) {
+            if (toast.buttons[i]?.classes) {
+                if (Array.isArray(toast.buttons[i].classes)) {
+                    toast.buttons[i].classes = toast.buttons[i].classes;
+                } else {
+                    // @ts-ignore
+                    toast.buttons[i].classes = [toast.buttons[i].classes];
+                }
+            } else {
+                toast.buttons[i].classes = [];
+            }
+            if (!toast.buttons[i]?.ariaLabel) {
+                toast.buttons[i].ariaLabel = null;
+            }
+            if (!toast.buttons[i]?.label) {
+                console.error("Toaster buttons require a label");
+                toast.buttons[i].label = null;
+            }
+            if (!toast.buttons[i]?.callback) {
+                console.error("Toaster buttons require a callback function");
+                toast.buttons[i].callback = () => {};
+            }
+            if (!toast.buttons[i]?.autofocus){
+                toast.buttons[i].autofocus = false;
+            }else{
+                toast.autofocus = false;
+            }
+        }
+
         toast.el = new ToastComponent(toast as ToasterNotification);
         this.toaster.push(toast as ToasterNotification);
 

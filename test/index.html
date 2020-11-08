@@ -168,12 +168,38 @@
         toaster-component toast-component copy-wrapper{display:block;flex:1}
         toaster-component toast-component copy-wrapper h3{display:block;color:var(--white);font-weight:var(--font-bold);margin-bottom:.25rem}
         toaster-component toast-component copy-wrapper p{display:block;color:var(--neutral-300);font-size:var(--font-sm);line-height:1.618}
-        toaster-component toast-component button{width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
-        toaster-component toast-component button:hover::before,
-        toaster-component toast-component button:focus::before{transform:scale(1)}
-        toaster-component toast-component button:active::before{opacity:.15}
-        toaster-component toast-component button::before{content:"";display:inline-block;width:100%;height:100%;border-radius:50%;background-color:var(--white);opacity:.06;position:absolute;transform:scale(0);transition:all 150ms var(--ease-bounce)}
-        toaster-component toast-component button svg{width:14px;height:14px}
+        toaster-component toast-component .close{width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
+        toaster-component toast-component .close:hover::before,
+        toaster-component toast-component .close:focus::before{transform:scale(1)}
+        toaster-component toast-component .close:active::before{opacity:.15}
+        toaster-component toast-component .close::before{content:"";display:inline-block;width:100%;height:100%;border-radius:50%;background-color:var(--white);opacity:.06;position:absolute;transform:scale(0);transition:all 150ms var(--ease-bounce)}
+        toaster-component toast-component .close svg{width:14px;height:14px}
+        toaster-component toast-component toast-actions{
+            display: flex;
+            width: 100%;
+            width: 100%;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+        toaster-component toast-component toast-actions button{
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0 0.5rem;
+            color: var(--primary-300);
+            margin-left: 0.5rem;
+            position: relative;
+        }
+        toaster-component toast-component toast-actions button:hover::before,
+        toaster-component toast-component toast-actions button:focus::before{transform:scale(1)}
+        toaster-component toast-component toast-actions button:active::before{opacity:.15}
+        toaster-component toast-component toast-actions button::before{content:"";display:inline-block;width:100%;height:100%;border-radius:0.25rem;background-color:var(--primary-500);opacity:.06;position:absolute;top:0;left:0;transform:scale(0);transition:all 150ms var(--ease-bounce)}
         @keyframes grow{
             from{
                 transform:translateY(150%);
@@ -233,6 +259,12 @@
                 title: "Example Toast Message",
                 message: "This is what a toaster message might look like. Click the button to stack notifications.",
                 autofocus: true,
+                buttons: [
+                    {
+                        label: "Reload",
+                        callback: ()=>{ location.reload(); },
+                    },
+                ],
             });
         });
     </script>

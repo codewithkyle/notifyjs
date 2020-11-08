@@ -74,19 +74,17 @@ export class SnackbarComponent extends HTMLElement {
     connectedCallback(){
         if (this.settings.autofocus){
             const closeButton:HTMLButtonElement = this.querySelector(".js-snackbar-close");
-            console.log(closeButton);
             if (closeButton){
                 closeButton.focus();
             }
-        }else{
-            if (this.settings.buttons.length) {
-                for (let i = 0; i < this.settings.buttons.length; i++) {
-                    if (this.settings.buttons[i].autofocus){
-                        const button:HTMLButtonElement = this.querySelector(`button[data-index="${i}"]`);
-                        if (button){
-                            button.focus();
-                            break;
-                        }
+        }
+        if (this.settings.buttons.length) {
+            for (let i = 0; i < this.settings.buttons.length; i++) {
+                if (this.settings.buttons[i].autofocus){
+                    const button:HTMLButtonElement = this.querySelector(`button[data-index="${i}"]`);
+                    if (button){
+                        button.focus();
+                        break;
                     }
                 }
             }
