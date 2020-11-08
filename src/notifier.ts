@@ -201,12 +201,6 @@ export class Notifier {
             shell = document.createElement("toaster-component");
             document.body.appendChild(shell);
         }
-
-        const lastSlice = shell.querySelector("toast-component") || null;
-        if (lastSlice) {
-            shell.insertBefore(toast.el, lastSlice);
-        } else {
-            shell.appendChild(toast.el);
-        }
+        shell.appendChild(toast.el);
     }
 }

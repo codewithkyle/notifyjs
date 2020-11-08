@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ability to autofocus buttons ([#14](https://github.com/codewithkyle/notifyjs/issues/14))
 - CDN compatible version
+- role attributes to snackbar and toast notifications
+
+### Fixed
+
+- toast notifications now stack with oldest notifications appearing at the bottom (better UX/expected notification behavior)
 
 ## [2.0.3] - 2020-09-16
 

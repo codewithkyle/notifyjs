@@ -29,6 +29,11 @@ export class ToastComponent extends HTMLElement {
 
         const title = document.createElement("h3");
         title.innerText = this.settings.title;
+        if (this.settings.closeable){
+            title.setAttribute("role", "alertdialog");
+        }else{
+            title.setAttribute("role", "alert");
+        }
         copyWrapper.appendChild(title);
 
         const message = document.createElement("p");

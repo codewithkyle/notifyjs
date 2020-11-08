@@ -27,6 +27,11 @@ export class SnackbarComponent extends HTMLElement {
 
         const message = document.createElement("p");
         message.innerText = this.settings.message;
+        if (this.settings.closeable || this.settings.buttons.length){
+            message.setAttribute("role", "alertdialog");
+        }else{
+            message.setAttribute("role", "alert");
+        }
         this.appendChild(message);
 
         if (this.settings.closeable || this.settings.buttons.length) {
