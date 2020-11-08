@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ability to autofocus buttons ([#14](https://github.com/codewithkyle/notifyjs/issues/14))
-
+- CDN compatible version
 
 ## [2.0.3] - 2020-09-16
 
