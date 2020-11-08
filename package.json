@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "compile": "tsc",
-        "test": "serve ./test",
+        "test": "npm run compile && npm run bundle && cp ./notify.min.mjs ./test/notify.min.mjs && serve ./test",
         "bundle": "rollup notify.js --file notify.mjs --format es --compact && terser notify.mjs -o notify.min.mjs -c && rm notify.mjs"
     },
     "keywords": [

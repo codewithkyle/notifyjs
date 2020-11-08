@@ -69,6 +69,7 @@ export class SnackbarComponent extends HTMLElement {
     connectedCallback(){
         if (this.settings.autofocus){
             const closeButton:HTMLButtonElement = this.querySelector(".js-snackbar-close");
+            console.log(closeButton);
             if (closeButton){
                 closeButton.focus();
             }

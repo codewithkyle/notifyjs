@@ -122,6 +122,7 @@ export class Notifier {
                 snackbar.buttons[i].ariaLabel = null;
             }
             if (!snackbar.buttons[i]?.label) {
+                console.error("Snackbar buttons require a label");
                 snackbar.buttons[i].label = null;
             }
             if (!snackbar.buttons[i]?.callback) {
