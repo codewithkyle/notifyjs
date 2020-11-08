@@ -92,6 +92,12 @@ export class Notifier {
             snackbar.force = false;
         }
 
+        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
+            snackbar.autofocus = settings.autofocus;
+        }else{
+            snackbar.autofocus = true;
+        }
+
         let buttons: Array<NotificationButton> = [];
         if (settings?.buttons) {
             if (Array.isArray(settings.buttons)) {
@@ -103,11 +109,11 @@ export class Notifier {
         snackbar.buttons = buttons;
         for (let i = 0; i < snackbar.buttons.length; i++) {
             if (snackbar.buttons[i]?.classes) {
-                if (!Array.isArray(snackbar.buttons[i].classes)) {
+                if (Array.isArray(snackbar.buttons[i].classes)) {
+                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
+                } else {
                     // @ts-ignore
                     snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
-                } else {
-                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
                 }
             } else {
                 snackbar.buttons[i].classes = [];
@@ -115,13 +121,17 @@ export class Notifier {
             if (!snackbar.buttons[i]?.ariaLabel) {
                 snackbar.buttons[i].ariaLabel = null;
             }
-            if (!snackbar.buttons[i]?.label || snackbar.buttons[i]?.label.length === 0) {
-                console.error("Snackbar buttons require a label");
-                snackbar.buttons[i].label = "Missing label";
+            if (!snackbar.buttons[i]?.label) {
+                snackbar.buttons[i].label = null;
             }
             if (!snackbar.buttons[i]?.callback) {
                 console.error("Snackbar buttons require a callback function");
                 snackbar.buttons[i].callback = () => {};
+            }
+            if (!snackbar.buttons[i]?.autofocus){
+                snackbar.buttons[i].autofocus = false;
+            }else{
+                snackbar.autofocus = false;
             }
         }
 
@@ -174,6 +184,12 @@ export class Notifier {
             toast.icon = settings.icon;
         } else {
             toast.icon = null;
+        }
+
+        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
+            toast.autofocus = settings.autofocus;
+        }else{
+            toast.autofocus = false;
         }
 
         toast.el = new ToastComponent(toast as ToasterNotification);
