@@ -3,6 +3,7 @@ export type NotificationButton = {
     callback: Function;
     ariaLabel?: string;
     classes?: string[];
+    autofocus?: boolean;
 };
 
 export type SnackbarNotification = {
@@ -14,6 +15,7 @@ export type SnackbarNotification = {
     force?: boolean;
     classes?: string[];
     el: HTMLElement;
+    autofocus?: boolean;
 };
 
 export type ToasterNotification = {
@@ -25,4 +27,9 @@ export type ToasterNotification = {
     classes?: string[];
     uid: string;
     el: HTMLElement;
+    timerEl?: HTMLElement;
+    autofocus?: boolean;
+    buttons?: Array<NotificationButton>;
+    timer?: "vertical" | "horizontal";
+    timerDuration?: number;
 };

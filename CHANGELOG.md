@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2020-11-09
+
+### Added
+
+- ability to autofocus buttons ([#14](https://github.com/codewithkyle/notifyjs/issues/14))
+- CDN compatible version (ES Module)
+- role attributes to snackbar and toast notifications
+- toast notificaitons can contain buttons ([#15](https://github.com/codewithkyle/notifyjs/issues/15))
+- toast notification timers ([#13](https://github.com/codewithkyle/notifyjs/issues/13))
+- updated readme
+
+### Fixed
+
+- toast notifications now stack with oldest notifications appearing at the bottom (better UX/expected notification behavior)
+
 ## [2.0.3] - 2020-09-16
 
 ### Fixed
@@ -115,7 +130,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Entire existing codebase due to rewrite
 
-[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v2.0.1...HEAD
+[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/codewithkyle/notifyjs/compare/v2.0.3...v2.1.0
+[2.0.3]: https://github.com/codewithkyle/notifyjs/compare/v2.0.1...v2.0.3
 [2.0.1]: https://github.com/codewithkyle/notifyjs/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/codewithkyle/notifyjs/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/codewithkyle/notifyjs/compare/v1.1.0...v1.2.0

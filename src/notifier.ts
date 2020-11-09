@@ -29,6 +29,14 @@ export class Notifier {
             for (let i = this.toaster.length - 1; i >= 0; i--) {
                 if (this.toaster[i]?.duration && this.toaster[i]?.duration !== Infinity) {
                     this.toaster[i].duration -= deltaTime;
+                    if (this.toaster[i].timer){
+                        const scale = this.toaster[i].duration / this.toaster[i].timerDuration;
+                        if (this.toaster[i].timer === "vertical"){
+                            this.toaster[i].timerEl.style.transform = `scaleY(${scale})`;
+                        }else{
+                            this.toaster[i].timerEl.style.transform = `scaleX(${scale})`;
+                        }
+                    }
                     if (this.toaster[i].duration <= 0) {
                         this.toaster[i].el.remove();
                         this.toaster.splice(i, 1);
@@ -92,6 +100,12 @@ export class Notifier {
             snackbar.force = false;
         }
 
+        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
+            snackbar.autofocus = settings.autofocus;
+        }else{
+            snackbar.autofocus = true;
+        }
+
         let buttons: Array<NotificationButton> = [];
         if (settings?.buttons) {
             if (Array.isArray(settings.buttons)) {
@@ -103,11 +117,11 @@ export class Notifier {
         snackbar.buttons = buttons;
         for (let i = 0; i < snackbar.buttons.length; i++) {
             if (snackbar.buttons[i]?.classes) {
-                if (!Array.isArray(snackbar.buttons[i].classes)) {
+                if (Array.isArray(snackbar.buttons[i].classes)) {
+                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
+                } else {
                     // @ts-ignore
                     snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
-                } else {
-                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
                 }
             } else {
                 snackbar.buttons[i].classes = [];
@@ -115,13 +129,18 @@ export class Notifier {
             if (!snackbar.buttons[i]?.ariaLabel) {
                 snackbar.buttons[i].ariaLabel = null;
             }
-            if (!snackbar.buttons[i]?.label || snackbar.buttons[i]?.label.length === 0) {
+            if (!snackbar.buttons[i]?.label) {
                 console.error("Snackbar buttons require a label");
-                snackbar.buttons[i].label = "Missing label";
+                snackbar.buttons[i].label = null;
             }
             if (!snackbar.buttons[i]?.callback) {
                 console.error("Snackbar buttons require a callback function");
                 snackbar.buttons[i].callback = () => {};
+            }
+            if (!snackbar.buttons[i]?.autofocus){
+                snackbar.buttons[i].autofocus = false;
+            }else{
+                snackbar.autofocus = false;
             }
         }
 
@@ -176,7 +195,66 @@ export class Notifier {
             toast.icon = null;
         }
 
+        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
+            toast.autofocus = settings.autofocus;
+        }else{
+            toast.autofocus = false;
+        }
+
+        let buttons: Array<NotificationButton> = [];
+        if (settings?.buttons) {
+            if (Array.isArray(settings.buttons)) {
+                buttons = settings.buttons;
+            } else {
+                buttons = [settings.buttons];
+            }
+        }
+        toast.buttons = buttons;
+        for (let i = 0; i < toast.buttons.length; i++) {
+            if (toast.buttons[i]?.classes) {
+                if (Array.isArray(toast.buttons[i].classes)) {
+                    toast.buttons[i].classes = toast.buttons[i].classes;
+                } else {
+                    // @ts-ignore
+                    toast.buttons[i].classes = [toast.buttons[i].classes];
+                }
+            } else {
+                toast.buttons[i].classes = [];
+            }
+            if (!toast.buttons[i]?.ariaLabel) {
+                toast.buttons[i].ariaLabel = null;
+            }
+            if (!toast.buttons[i]?.label) {
+                console.error("Toaster buttons require a label");
+                toast.buttons[i].label = null;
+            }
+            if (!toast.buttons[i]?.callback) {
+                console.error("Toaster buttons require a callback function");
+                toast.buttons[i].callback = () => {};
+            }
+            if (!toast.buttons[i]?.autofocus){
+                toast.buttons[i].autofocus = false;
+            }else{
+                toast.autofocus = false;
+            }
+        }
+
+        if (settings?.timer && toast.duration !== Infinity){
+            if (settings.timer === "vertical" || settings.timer === "horizontal"){
+                toast.timer = settings.timer;
+            }else{
+                console.error("Toaster timer value only accpets 'vertical' or 'horizontal'");
+                toast.timer = null;    
+            }
+            toast.timerDuration = toast.duration;
+        }else{
+            toast.timer = null;
+        }
+
         toast.el = new ToastComponent(toast as ToasterNotification);
+        if (toast.timer){
+            toast.timerEl = toast.el.querySelector("toast-timer");
+        }
         this.toaster.push(toast as ToasterNotification);
 
         let shell = document.body.querySelector("toaster-component") || null;
@@ -184,12 +262,6 @@ export class Notifier {
             shell = document.createElement("toaster-component");
             document.body.appendChild(shell);
         }
-
-        const lastSlice = shell.querySelector("toast-component") || null;
-        if (lastSlice) {
-            shell.insertBefore(toast.el, lastSlice);
-        } else {
-            shell.appendChild(toast.el);
-        }
+        shell.appendChild(toast.el);
     }
 }
