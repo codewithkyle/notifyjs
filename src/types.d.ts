@@ -27,6 +27,9 @@ export type ToasterNotification = {
     classes?: string[];
     uid: string;
     el: HTMLElement;
+    timerEl?: HTMLElement;
     autofocus?: boolean;
     buttons?: Array<NotificationButton>;
+    timer?: "vertical" | "horizontal";
+    timerDuration?: number;
 };

@@ -165,10 +165,10 @@
         toaster-component toast-component.-green i{color:#48bb78}
         toaster-component toast-component i{width:24px;height:24px;position:relative;display:inline-flex;justify-content:center;align-items:center;margin-right:1rem;color:#4299e1}
         toaster-component toast-component i svg{width:18px;height:18px}
-        toaster-component toast-component copy-wrapper{display:block;flex:1}
+        toaster-component toast-component copy-wrapper{display:block;flex:1;z-index: 2;}
         toaster-component toast-component copy-wrapper h3{display:block;color:var(--white);font-weight:var(--font-bold);margin-bottom:.25rem}
         toaster-component toast-component copy-wrapper p{display:block;color:var(--neutral-300);font-size:var(--font-sm);line-height:1.618}
-        toaster-component toast-component .close{width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
+        toaster-component toast-component .close{z-index: 2;width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
         toaster-component toast-component .close:hover::before,
         toaster-component toast-component .close:focus::before{transform:scale(1)}
         toaster-component toast-component .close:active::before{opacity:.15}
@@ -181,7 +181,7 @@
             flex-flow: row wrap;
             align-items: center;
             justify-content: flex-end;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
         }
         toaster-component toast-component toast-actions button{
             height: 36px;
@@ -202,7 +202,7 @@
         toaster-component toast-component toast-actions button::before{content:"";display:inline-block;width:100%;height:100%;border-radius:0.25rem;background-color:var(--primary-500);opacity:.06;position:absolute;top:0;left:0;transform:scale(0);transition:all 150ms var(--ease-bounce)}
         @keyframes grow{
             from{
-                transform:translateY(150%);
+                transform:translateY(50%);
                 opacity: 0;
             }
             to{
@@ -223,9 +223,31 @@
             width: calc(300px + 2rem);
         }
         toast-component{
-            transform: translateY(150%);
+            transform: translateY(50%);
             opacity: 0;
             animation: grow 300ms forwards var(--ease-in);
+        }
+        toast-timer{
+            position: absolute;
+            background-color: var(--white);
+            
+        }
+        toast-timer.vertical{
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.07;
+            transform-origin: bottom center;
+            z-index: 1;
+        }
+        toast-timer.horizontal{
+            opacity: 0.3;
+            bottom: 0;
+            left: 0;
+            height: 8px;
+            width: 100%;
+            transform-origin: right center;
         }
     </style>
 </head>
@@ -265,6 +287,8 @@
                         callback: ()=>{ location.reload(); },
                     },
                 ],
+                timer: "horizontal",
+                duration: 10,
             });
         });
     </script>

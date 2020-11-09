@@ -80,6 +80,17 @@ export class ToastComponent extends HTMLElement {
             closeButton.addEventListener("click", this.handleCloseClickEvent);
             this.appendChild(closeButton);
         }
+
+        if (this.settings.timer){
+            const timer = document.createElement("toast-timer");
+            timer.className = this.settings.timer;
+            if (this.settings.timer === "horizontal"){
+                timer.style.transform = "scaleX(1)";
+            }else{
+                timer.style.transform = "scaleY(1)";
+            }
+            this.append(timer);
+        }
     }
 
     connectedCallback(){

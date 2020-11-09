@@ -1,6 +1,6 @@
 # Notify.js
 
-Notify.js is a hyper-lightweight utility library helping to manage simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
+Notify.js is a hyper-lightweight utility library for managing simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
 
 ## Installation
 
@@ -10,7 +10,22 @@ Download Notify.js via NPM:
 npm i --save @codewithkyle/notifyjs
 ```
 
+Or use the CDN version:
+
+```javascript
+import { Notifier, snackbar, toast } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@2.1.0/notify.min.mjs;
+```
+
 ## Usage
+
+1. [Notification Manager](#notification-manager)
+1. [Global Notifications](#global-manager)
+1. [Snackbar Notification](#snackbar-notification)
+    1. [Snackbar Interface](#snackbar-interface)
+    1. [Snackbar HTML Structure](#snackbar-html-structure)
+1. [Toast Notification](#toast-notification)
+    1. [Toast Interface](#toast-interface)
+    1. [Toast HTML Structure](#toast-html-structure)
 
 There are two ways to use this package. You can create a Notification Manager or use the global manager. Each manager has a queue and new notifications are placed in the queue in the order that they're requested. The queue can be skipped by settings the `force` value to true.
 
@@ -53,12 +68,31 @@ notifier.toast({
     title: "Toast notificaitons require a title",
     message: "And they require a message",
 });
+
+// Adds an action button
+notifier.snackbar({
+    message: "All snackbar notifications require a message",
+    buttons: [
+        {
+            label: "Update",
+            callback: () => {
+                console.log("User clicked the update button");
+            },
+        },
+    ],
+});
 ```
+
+---
 
 ## Snackbar Notification
 
+Snackbar notifications are great for quick one-off notifications.
+
+### Snackbar Interface 
+
 ```typescript
-interface NotificationOptions {
+interface SnackbarNotification {
     message: string;
     duration?: number; // in seconds
     closeable?: boolean;
@@ -75,25 +109,7 @@ interface NotificationOptions {
 }
 ```
 
-### User Interaction
-
-Notify.js also allows for user interactions via a button element. The action requires a custom label for the button along with a callback function that will be called when the `click` event is fired on the button.
-
-```typescript
-notify({
-    message: "A new version of this application is available",
-    buttons: [
-        {
-            label: "Update",
-            callback: () => {
-                console.log("User clicked the update button");
-            },
-        },
-    ],
-});
-```
-
-### HTML Structure
+### Snackbar HTML Structure
 
 ```html
 <snackbar-component>
@@ -107,7 +123,13 @@ notify({
 </snackbar-component>
 ```
 
+---
+
 ## Toast Notification
+
+Toaster notifications are great for application-like notification systems where users will need to recieve warnings, updates, successes, and errors.
+
+### Toast Interface 
 
 ```typescript
 type ToasterNotification = {
@@ -125,10 +147,11 @@ type ToasterNotification = {
         classes?: Array<string> | string;
         autofocus?: boolean;
     }>;
+    timer?: "vertical" | "horizontal";
 };
 ```
 
-### HTML Structure
+### Toast HTML Structure
 
 ```html
 <toaster-component>

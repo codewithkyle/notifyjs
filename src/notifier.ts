@@ -29,6 +29,14 @@ export class Notifier {
             for (let i = this.toaster.length - 1; i >= 0; i--) {
                 if (this.toaster[i]?.duration && this.toaster[i]?.duration !== Infinity) {
                     this.toaster[i].duration -= deltaTime;
+                    if (this.toaster[i].timer){
+                        const scale = this.toaster[i].duration / this.toaster[i].timerDuration;
+                        if (this.toaster[i].timer === "vertical"){
+                            this.toaster[i].timerEl.style.transform = `scaleY(${scale})`;
+                        }else{
+                            this.toaster[i].timerEl.style.transform = `scaleX(${scale})`;
+                        }
+                    }
                     if (this.toaster[i].duration <= 0) {
                         this.toaster[i].el.remove();
                         this.toaster.splice(i, 1);
@@ -231,7 +239,22 @@ export class Notifier {
             }
         }
 
+        if (settings?.timer && toast.duration !== Infinity){
+            if (settings.timer === "vertical" || settings.timer === "horizontal"){
+                toast.timer = settings.timer;
+            }else{
+                console.error("Toaster timer value only accpets 'vertical' or 'horizontal'");
+                toast.timer = null;    
+            }
+            toast.timerDuration = toast.duration;
+        }else{
+            toast.timer = null;
+        }
+
         toast.el = new ToastComponent(toast as ToasterNotification);
+        if (toast.timer){
+            toast.timerEl = toast.el.querySelector("toast-timer");
+        }
         this.toaster.push(toast as ToasterNotification);
 
         let shell = document.body.querySelector("toaster-component") || null;
