@@ -166,10 +166,10 @@ type ToasterNotification = {
                 <button>Action</button>
             </toast-actions>
         </copy-wrapper>
-        <button>
+        <button class="close">
             <svg />
         </button>
-        <toast-timer></toast-timer>
+        <toast-timer class="vertical || horizontal"></toast-timer>
     </toast-component>
 </toaster-component>
 ```
