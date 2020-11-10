@@ -116,9 +116,9 @@ interface SnackbarNotification {
     <p>Custom notification message</p>
     <snackbar-actions>
         <button>Action</button>
-        <close-button>
+        <button class="close">
             <svg />
-        </close-button>
+        </button>
     </snackbar-actions>
 </snackbar-component>
 ```
@@ -169,6 +169,7 @@ type ToasterNotification = {
         <button>
             <svg />
         </button>
+        <toast-timer></toast-timer>
     </toast-component>
 </toaster-component>
 ```
