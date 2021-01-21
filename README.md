@@ -1,6 +1,6 @@
 # Notify.js
 
-Notify.js is a hyper-lightweight utility library for managing simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
+Notify.js is a lightweight (2.5kb) utility library for managing simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm i --save @codewithkyle/notifyjs
 Or use the CDN version:
 
 ```javascript
-import { Notifier, snackbar, toast } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@2.1.0/notify.min.mjs";
+import { Notifier, snackbar, toast } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@2.1.1/notify.min.mjs";
 ```
 
 ## Usage
