@@ -61,16 +61,16 @@ import { snackbar, toast } from "@codewithkyle/notifyjs";
 Create a notification:
 
 ```typescript
-notifier.snackbar({
+snackbar({
     message: "All snackbar notifications require a message",
 });
-notifier.toast({
+toast({
     title: "Toast notificaitons require a title",
     message: "And they require a message",
 });
 
 // Adds an action button
-notifier.snackbar({
+snackbar({
     message: "All snackbar notifications require a message",
     buttons: [
         {
