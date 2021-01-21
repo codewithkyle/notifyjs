@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.1] - 2021-01-21
+
+### Fixed
+
+- snackbar missing element bug
+
 ## [2.1.0] - 2020-11-09
 
 ### Added

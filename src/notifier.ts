@@ -44,11 +44,11 @@ export class Notifier {
                 }
             }
             if (this.snackbarQueue.length) {
-                if (!this.snackbarQueue[0].el) {
+                if (!this.snackbarQueue?.[0]?.el) {
                     this.snackbarQueue[0].el = new SnackbarComponent(this.snackbarQueue[0]);
                     document.body.appendChild(this.snackbarQueue[0].el);
                 }
-                if (this.snackbarQueue[0]?.duration && this.snackbarQueue[0]?.duration !== Infinity) {
+                if (this.snackbarQueue[0]?.duration && this.snackbarQueue[0]?.duration !== Infinity && this.snackbarQueue[0]?.el?.isConnected) {
                     this.snackbarQueue[0].duration -= deltaTime;
                     if (this.snackbarQueue[0].duration <= 0) {
                         this.snackbarQueue[0].el.remove();
@@ -145,7 +145,9 @@ export class Notifier {
         }
 
         if (snackbar.force && this.snackbarQueue.length) {
-            this.snackbarQueue[0].el.remove();
+            if (this.snackbarQueue[0]?.el?.isConnected){
+                this.snackbarQueue[0].el.remove();
+            }
             this.snackbarQueue.splice(0, 1, snackbar as SnackbarNotification);
         } else {
             this.snackbarQueue.push(snackbar as SnackbarNotification);
