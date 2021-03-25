@@ -13,11 +13,11 @@ npm i --save @codewithkyle/notifyjs
 Or use the CDN version:
 
 ```javascript
-import { Notifier, snackbar, toast, append } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3.0.0/notify.min.mjs";
+import { Notifier, snackbar, toast, append } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3/notify.min.mjs";
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3.0.0/notify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3/notify.min.js"></script>
 <script>
     Notifier.snackbar({ message: "This is a snackbar notification." });
     Notifier.toast({ title: "CDN Example", message: "This is a toast notification." });
