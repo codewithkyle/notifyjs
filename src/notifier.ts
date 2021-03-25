@@ -1,4 +1,4 @@
-import { SnackbarNotification, ToasterNotification, NotificationButton } from "./types";
+import { SnackbarNotification, ToasterNotification } from "./types";
 import { SnackbarComponent } from "./snackbar-component";
 import { ToastComponent } from "./toast-component";
 
@@ -6,8 +6,11 @@ export class Notifier {
     private snackbarQueue: Array<SnackbarNotification>;
     private toaster: Array<ToasterNotification>;
     private time: number;
+    private shell: HTMLElement;
 
     constructor() {
+        this.shell = document.createElement("toaster-component");
+        document.body.appendChild(this.shell);
         this.snackbarQueue = [];
         this.toaster = [];
         this.time = performance.now();
@@ -61,209 +64,70 @@ export class Notifier {
     }
 
     public snackbar(settings: Partial<SnackbarNotification>) {
-        const snackbar: Partial<SnackbarNotification> = {};
+        const snackbar: SnackbarNotification = Object.assign({
+            message: "Snackbar notificaitons require a message",
+            uid: this.uid(),
+            el: null,
+            duration: 30,
+            closeable: true,
+            buttons: [],
+            force: true,
+            classes: [],
+            autofocus: true,
+        }, settings);
 
-        if (!settings?.message || settings?.message?.length === 0) {
-            console.error("Snackbar notificaitons require a message");
-            return;
+        if (!Array.isArray(snackbar.buttons)) {
+            snackbar.buttons = [snackbar.buttons];
         }
 
-        snackbar.message = settings.message;
-        snackbar.uid = this.uid();
-        snackbar.el = null;
-
-        let classes: Array<string> = [];
-        if (settings?.classes) {
-            if (Array.isArray(settings.classes)) {
-                classes = settings.classes;
-            } else {
-                classes = [settings.classes];
-            }
-        }
-        snackbar.classes = classes;
-
-        if (typeof settings?.duration === "number" || settings?.duration === Infinity) {
-            snackbar.duration = settings.duration;
-        } else {
-            snackbar.duration = 3;
-        }
-
-        if (typeof settings?.closeable !== "undefined" && typeof settings?.closeable === "boolean") {
-            snackbar.closeable = settings?.closeable;
-        } else {
-            snackbar.closeable = true;
-        }
-
-        if (typeof settings?.force !== "undefined" && typeof settings?.force === "boolean") {
-            snackbar.force = settings?.force;
-        } else {
-            snackbar.force = false;
-        }
-
-        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
-            snackbar.autofocus = settings.autofocus;
-        }else{
-            snackbar.autofocus = true;
-        }
-
-        let buttons: Array<NotificationButton> = [];
-        if (settings?.buttons) {
-            if (Array.isArray(settings.buttons)) {
-                buttons = settings.buttons;
-            } else {
-                buttons = [settings.buttons];
-            }
-        }
-        snackbar.buttons = buttons;
-        for (let i = 0; i < snackbar.buttons.length; i++) {
-            if (snackbar.buttons[i]?.classes) {
-                if (Array.isArray(snackbar.buttons[i].classes)) {
-                    snackbar.buttons[i].classes = snackbar.buttons[i].classes;
-                } else {
-                    // @ts-ignore
-                    snackbar.buttons[i].classes = [snackbar.buttons[i].classes];
-                }
-            } else {
-                snackbar.buttons[i].classes = [];
-            }
-            if (!snackbar.buttons[i]?.ariaLabel) {
-                snackbar.buttons[i].ariaLabel = null;
-            }
-            if (!snackbar.buttons[i]?.label) {
-                console.error("Snackbar buttons require a label");
-                snackbar.buttons[i].label = null;
-            }
-            if (!snackbar.buttons[i]?.callback) {
-                console.error("Snackbar buttons require a callback function");
-                snackbar.buttons[i].callback = () => {};
-            }
-            if (!snackbar.buttons[i]?.autofocus){
-                snackbar.buttons[i].autofocus = false;
-            }else{
-                snackbar.autofocus = false;
-            }
+        if (!Array.isArray(snackbar.classes)) {
+            snackbar.classes = [snackbar.classes];
         }
 
         if (snackbar.force && this.snackbarQueue.length) {
             if (this.snackbarQueue[0]?.el?.isConnected){
                 this.snackbarQueue[0].el.remove();
             }
-            this.snackbarQueue.splice(0, 1, snackbar as SnackbarNotification);
+            this.snackbarQueue.splice(0, 1, snackbar);
         } else {
-            this.snackbarQueue.push(snackbar as SnackbarNotification);
+            this.snackbarQueue.push(snackbar);
         }
     }
 
     public toast(settings: Partial<ToasterNotification>) {
-        const toast: Partial<ToasterNotification> = {};
+        const toast: ToasterNotification = Object.assign({
+            title: "Title Required",
+            message: "Toast notificaitons require a message",
+            closeable: true,
+            icon: null,
+            duration: 30,
+            classes: [],
+            uid: this.uid(),
+            el: null,
+            timerEl: null,
+            autofocus: true,
+            buttons: [],
+            timer: null,
+            timerDuration: 30,
+        }, settings);
 
-        if (!settings?.message || settings?.message?.length === 0) {
-            console.error("Toast notificaitons require a message");
-            return;
-        } else if (!settings?.title || settings?.title?.length === 0) {
-            console.error("Toast notificaitons require a title");
-            return;
+        if (!Array.isArray(toast.buttons)) {
+            toast.buttons = [toast.buttons];
         }
 
-        toast.title = settings.title;
-        toast.message = settings.message;
-        toast.uid = this.uid();
-
-        let classes: Array<string> = [];
-        if (settings?.classes) {
-            if (Array.isArray(settings.classes)) {
-                classes = settings.classes;
-            } else {
-                classes = [settings.classes];
-            }
-        }
-        toast.classes = classes;
-
-        if (typeof settings?.duration === "number" || settings?.duration === Infinity) {
-            toast.duration = settings.duration;
-        } else {
-            toast.duration = 3;
+        if (!Array.isArray(toast.classes)) {
+            toast.classes = [toast.classes];
         }
 
-        if (typeof settings?.closeable !== "undefined" && typeof settings?.closeable === "boolean") {
-            toast.closeable = settings.closeable;
-        } else {
-            toast.closeable = true;
-        }
-
-        if (settings?.icon && typeof settings?.icon === "string") {
-            toast.icon = settings.icon;
-        } else {
-            toast.icon = null;
-        }
-
-        if (typeof settings?.autofocus !== "undefined" && typeof settings?.autofocus === "boolean"){
-            toast.autofocus = settings.autofocus;
-        }else{
-            toast.autofocus = false;
-        }
-
-        let buttons: Array<NotificationButton> = [];
-        if (settings?.buttons) {
-            if (Array.isArray(settings.buttons)) {
-                buttons = settings.buttons;
-            } else {
-                buttons = [settings.buttons];
-            }
-        }
-        toast.buttons = buttons;
-        for (let i = 0; i < toast.buttons.length; i++) {
-            if (toast.buttons[i]?.classes) {
-                if (Array.isArray(toast.buttons[i].classes)) {
-                    toast.buttons[i].classes = toast.buttons[i].classes;
-                } else {
-                    // @ts-ignore
-                    toast.buttons[i].classes = [toast.buttons[i].classes];
-                }
-            } else {
-                toast.buttons[i].classes = [];
-            }
-            if (!toast.buttons[i]?.ariaLabel) {
-                toast.buttons[i].ariaLabel = null;
-            }
-            if (!toast.buttons[i]?.label) {
-                console.error("Toaster buttons require a label");
-                toast.buttons[i].label = null;
-            }
-            if (!toast.buttons[i]?.callback) {
-                console.error("Toaster buttons require a callback function");
-                toast.buttons[i].callback = () => {};
-            }
-            if (!toast.buttons[i]?.autofocus){
-                toast.buttons[i].autofocus = false;
-            }else{
-                toast.autofocus = false;
-            }
-        }
-
-        if (settings?.timer && toast.duration !== Infinity){
-            if (settings.timer === "vertical" || settings.timer === "horizontal"){
-                toast.timer = settings.timer;
-            }else{
-                console.error("Toaster timer value only accpets 'vertical' or 'horizontal'");
-                toast.timer = null;    
-            }
+        if (toast.duration !== Infinity && toast.timer === "vertical" || toast.timer === "horizontal"){
             toast.timerDuration = toast.duration;
-        }else{
-            toast.timer = null;
         }
 
-        toast.el = new ToastComponent(toast as ToasterNotification);
+        toast.el = new ToastComponent(toast);
         if (toast.timer){
             toast.timerEl = toast.el.querySelector("toast-timer");
         }
-        this.toaster.push(toast as ToasterNotification);
-
-        let shell = document.body.querySelector("toaster-component") || null;
-        if (!shell) {
-            shell = document.createElement("toaster-component");
-            document.body.appendChild(shell);
-        }
-        shell.appendChild(toast.el);
+        this.toaster.push(toast);
+        this.shell.appendChild(toast.el);
     }
 }

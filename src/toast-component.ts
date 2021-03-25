@@ -97,6 +97,8 @@ export class ToastComponent extends HTMLElement {
         if (this.settings.autofocus){
             const closeButton:HTMLButtonElement = this.querySelector(".js-toast-close");
             if (closeButton){
+                // @ts-ignore
+                document.activeElement.blur();
                 closeButton.focus();
             }
         }

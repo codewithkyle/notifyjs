@@ -75,6 +75,8 @@ export class SnackbarComponent extends HTMLElement {
         if (this.settings.autofocus){
             const closeButton:HTMLButtonElement = this.querySelector(".js-snackbar-close");
             if (closeButton){
+                // @ts-ignore
+                document.activeElement.blur();
                 closeButton.focus();
             }
         }
@@ -83,6 +85,8 @@ export class SnackbarComponent extends HTMLElement {
                 if (this.settings.buttons[i].autofocus){
                     const button:HTMLButtonElement = this.querySelector(`button[data-index="${i}"]`);
                     if (button){
+                        // @ts-ignore
+                        document.activeElement.blur();
                         button.focus();
                         break;
                     }
