@@ -12,6 +12,7 @@ export class SnackbarComponent extends HTMLElement {
         const target = e.currentTarget as HTMLElement;
         const index = parseInt(target.dataset.index);
         this.settings.buttons[index].callback();
+        this.remove();
     };
 
     private handleCloseClickEvent: EventListener = () => {

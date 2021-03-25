@@ -16,6 +16,7 @@ export class ToastComponent extends HTMLElement {
         const target = e.currentTarget as HTMLElement;
         const index = parseInt(target.dataset.index);
         this.settings.buttons[index].callback();
+        this.remove();
     };
 
     private render() {

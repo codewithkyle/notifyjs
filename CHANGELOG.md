@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - autofocus bug ([#19](https://github.com/codewithkyle/notifyjs/issues/19))
+- action button bug ([#20](https://github.com/codewithkyle/notifyjs/issues/20))
 
 ## [2.1.1] - 2021-01-21
 
