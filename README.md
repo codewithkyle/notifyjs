@@ -1,6 +1,6 @@
 # Notify.js
 
-Notify.js is a lightweight (2.5kb) utility library for managing simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
+Notify.js is a lightweight (2.4kb) utility library for managing simple [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
 
 ## Installation
 
@@ -13,7 +13,15 @@ npm i --save @codewithkyle/notifyjs
 Or use the CDN version:
 
 ```javascript
-import { Notifier, snackbar, toast } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@2.1.1/notify.min.mjs";
+import { Notifier, snackbar, toast, append } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3.0.0/notify.min.mjs";
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3.0.0/notify.min.js"></script>
+<script>
+    Notifier.snackbar({ message: "This is a snackbar notification." });
+    Notifier.toast({ title: "CDN Example", message: "This is a toast notification." });
+</script>
 ```
 
 ## Usage
@@ -83,6 +91,24 @@ snackbar({
 });
 ```
 
+Append custom toast notifications:
+
+```typescript
+import { append } from "@codewithkyle/notifyjs";
+
+class CustomToasterElement extends HTMLElement {
+    constructor(message){
+        super();
+        this.innerText = message;
+        setTimeout(() => {
+            this.remove();
+        }, 5000);
+    }
+}
+
+append(new CustomToasterElement());
+```
+
 ---
 
 ## Snackbar Notification
@@ -103,9 +129,9 @@ interface SnackbarNotification {
         classes?: Array<string> | string;
         autofocus?: boolean;
     }>;
-    force?: boolean;
+    force?: boolean; // defaults to true
     classes?: Array<string> | string;
-    autofocus?: boolean;
+    autofocus?: boolean; // defaults to true
 }
 ```
 
@@ -139,7 +165,7 @@ type ToasterNotification = {
     icon?: string; // svg or img
     duration?: number; // in seconds
     classes?: string[];
-    autofocus?: boolean;
+    autofocus?: boolean; // defaults to true
     buttons?: Array<{
         label: string;
         callback: Function;
@@ -147,7 +173,7 @@ type ToasterNotification = {
         classes?: Array<string> | string;
         autofocus?: boolean;
     }>;
-    timer?: "vertical" | "horizontal";
+    timer?: "vertical" | "horizontal" | null; // defaults to null
 };
 ```
 

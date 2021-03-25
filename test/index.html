@@ -255,10 +255,11 @@
     <div class="w-screen h-screen" flex="justify-center items-center">
         <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-snackbar">Test Snackbar</button>
         <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-toast">Test Toast</button>
+        <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-custom-toast">Test Custom Toast</button>
     </div>
 
     <script type="module">
-        import { snackbar, toast } from "./notify.min.mjs";
+        import { snackbar, toast, append } from "./notify.min.mjs";
 
         const snackbarButton = document.body.querySelector(".js-snackbar");
         snackbarButton.addEventListener("click", () =>{
@@ -291,6 +292,27 @@
                 duration: 10,
             });
         });
+
+        class CustomToasterElement extends HTMLElement {
+            constructor(message){
+                super();
+                this.innerText = message;
+                this.style.cssText = "padding:1rem;background-color:#fff;border-radius:0.5rem;box-shadow:0 0 8px rgba(0,0,0,0.3);margin-top:1rem;width:100%;height:48px;display:flex;align-items:center;justify-content:center;";
+                setTimeout(() => {
+                    this.remove()
+                }, 5000);
+            }
+        }
+        customElements.define("custom-toast", CustomToasterElement);
+        const customToastButton = document.body.querySelector(".js-custom-toast");
+        customToastButton.addEventListener("click", () => {
+            append(new CustomToasterElement("Custom toaster notification example."));
+        });
+    </script>
+
+    <script src="/notify.min.js"></script>
+    <script>
+        Notifier.snackbar({ message: "Test" });
     </script>
 </body>
 </html>

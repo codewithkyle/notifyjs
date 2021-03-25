@@ -12,6 +12,12 @@ const files = [
     "snackbar-component.js.map",
     "toast-component.js",
     "toast-component.js.map",
+    "notifier.d.ts",
+    "notify.d.ts",
+    "snackbar-component.d.ts",
+    "toast-component.d.ts",
+    "types.d.ts",
+    "notify.min.js",
 ];
 
 function normalizePath(file){

@@ -16,6 +16,7 @@ export class ToastComponent extends HTMLElement {
         const target = e.currentTarget as HTMLElement;
         const index = parseInt(target.dataset.index);
         this.settings.buttons[index].callback();
+        this.remove();
     };
 
     private render() {
@@ -55,11 +56,11 @@ export class ToastComponent extends HTMLElement {
                 button.innerText = this.settings.buttons[i].label;
                 button.dataset.index = `${i}`;
 
-                for (let k = 0; k < this.settings.buttons[i].classes.length; k++) {
+                for (let k = 0; k < this.settings.buttons[i]?.classes?.length; k++) {
                     button.classList.add(this.settings.buttons[i].classes[k]);
                 }
 
-                if (this.settings.buttons[i].ariaLabel) {
+                if (this.settings.buttons[i]?.ariaLabel) {
                     button.setAttribute("aria-label", this.settings.buttons[i].ariaLabel);
                 }
 
@@ -97,6 +98,8 @@ export class ToastComponent extends HTMLElement {
         if (this.settings.autofocus){
             const closeButton:HTMLButtonElement = this.querySelector(".js-toast-close");
             if (closeButton){
+                // @ts-ignore
+                document.activeElement.blur();
                 closeButton.focus();
             }
         }
