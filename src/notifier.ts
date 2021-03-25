@@ -9,8 +9,11 @@ export class Notifier {
     private shell: HTMLElement;
 
     constructor() {
-        this.shell = document.createElement("toaster-component");
-        document.body.appendChild(this.shell);
+        this.shell = document.body.querySelector("toaster-component");
+        if (this.shell === null){
+            this.shell = document.createElement("toaster-component");
+            document.body.appendChild(this.shell);
+        }
         this.snackbarQueue = [];
         this.toaster = [];
         this.time = performance.now();
@@ -129,5 +132,9 @@ export class Notifier {
         }
         this.toaster.push(toast);
         this.shell.appendChild(toast.el);
+    }
+
+    public append(el:HTMLElement){
+        this.shell.appendChild(el);
     }
 }

@@ -12,14 +12,20 @@
         "snackbar-component.js.map",
         "toast-component.js",
         "toast-component.js.map",
-        "notify.min.mjs"
+        "notify.min.mjs",
+        "notifier.d.ts",
+        "notify.d.ts",
+        "snackbar-component.d.ts",
+        "toast-component.d.ts",
+        "types.d.ts",
+        "notify.min.js"
     ],
     "scripts": {
         "cleanup": "node ./build/cleanup.js",
         "compile": "tsc",
         "test": "npm run compile && npm run bundle && cp ./notify.min.mjs ./test/notify.min.mjs && serve ./test",
-        "bundle": "rollup notify.js --file notify.mjs --format es --compact && terser notify.mjs -o notify.min.mjs -c && rm notify.mjs",
-        "prerelease": "npm run cleanup && npm run compile && npm run bundle"
+        "bundle": "esbuild ./notify.js --outfile=notify.min.mjs --format=esm --minify --bundle && esbuild ./notify.js --outfile=notify.min.js --format=iife --minify-whitespace --global-name=Notifier  --bundle",
+        "prerelease": "npm run cleanup && npm run compile && npm run bundle && cp ./src/types.d.ts ./types.d.ts"
     },
     "keywords": [
         "snackbar",
@@ -31,7 +37,7 @@
     "author": "Kyle Andrews",
     "license": "MIT",
     "devDependencies": {
-        "rollup": "^2.37.1",
+        "esbuild": "^0.10.0",
         "serve": "^11.3.2",
         "terser": "^5.5.1",
         "typescript": "^4.1.3"

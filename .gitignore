@@ -13,3 +13,9 @@ toast-component.js
 toast-component.js.map
 notify.min.mjs
 notify.mjs
+types.d.ts
+notifier.d.ts
+notify.d.ts
+snackbar-component.d.ts
+toast-component.d.ts
+notify.min.js

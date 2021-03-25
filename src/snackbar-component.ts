@@ -4,6 +4,7 @@ export class SnackbarComponent extends HTMLElement {
     private settings: SnackbarNotification;
     constructor(snackbar: SnackbarNotification) {
         super();
+        console.log(snackbar);
         this.settings = snackbar;
         this.render();
     }
@@ -44,11 +45,11 @@ export class SnackbarComponent extends HTMLElement {
                     button.innerText = this.settings.buttons[i].label;
                     button.dataset.index = `${i}`;
 
-                    for (let k = 0; k < this.settings.buttons[i].classes.length; k++) {
+                    for (let k = 0; k < this.settings.buttons[i]?.classes?.length; k++) {
                         button.classList.add(this.settings.buttons[i].classes[k]);
                     }
 
-                    if (this.settings.buttons[i].ariaLabel) {
+                    if (this.settings.buttons[i]?.ariaLabel) {
                         button.setAttribute("aria-label", this.settings.buttons[i].ariaLabel);
                     }
 
