@@ -164,7 +164,7 @@
         toaster-component toast-component.-green{border-color:#48bb78}
         toaster-component toast-component.-green i{color:#48bb78}
         toaster-component toast-component i{width:24px;height:24px;position:relative;display:inline-flex;justify-content:center;align-items:center;margin-right:1rem;color:#4299e1}
-        toaster-component toast-component i svg{width:18px;height:18px}
+        toaster-component toast-component i svg{width:24px;height:24px}
         toaster-component toast-component copy-wrapper{display:block;flex:1;z-index: 2;}
         toaster-component toast-component copy-wrapper h3{display:block;color:var(--white);font-weight:var(--font-bold);margin-bottom:.25rem}
         toaster-component toast-component copy-wrapper p{display:block;color:var(--neutral-300);font-size:var(--font-sm);line-height:1.618}
@@ -291,6 +291,12 @@
                 timer: "horizontal",
                 duration: 10,
             });
+            toast({
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
+                title: "Example Toast Message",
+                message: "This is what a toaster message might look like. Click the button to stack notifications.",
+                class: "success"
+            });
         });
 
         class CustomToasterElement extends HTMLElement {
@@ -308,11 +314,6 @@
         customToastButton.addEventListener("click", () => {
             append(new CustomToasterElement("Custom toaster notification example."));
         });
-    </script>
-
-    <script src="/notify.min.js"></script>
-    <script>
-        Notifier.snackbar({ message: "Test" });
     </script>
 </body>
 </html>
