@@ -6,14 +6,8 @@ export class Notifier {
     private snackbarQueue: Array<SnackbarNotification>;
     private toaster: Array<ToasterNotification>;
     private time: number;
-    private shell: HTMLElement;
 
     constructor() {
-        this.shell = document.body.querySelector("toaster-component");
-        if (this.shell === null){
-            this.shell = document.createElement("toaster-component");
-            document.body.appendChild(this.shell);
-        }
         this.snackbarQueue = [];
         this.toaster = [];
         this.time = performance.now();
@@ -35,11 +29,11 @@ export class Notifier {
             for (let i = this.toaster.length - 1; i >= 0; i--) {
                 if (this.toaster[i]?.duration && this.toaster[i]?.duration !== Infinity) {
                     this.toaster[i].duration -= deltaTime;
-                    if (this.toaster[i].timer){
+                    if (this.toaster[i].timer) {
                         const scale = this.toaster[i].duration / this.toaster[i].timerDuration;
-                        if (this.toaster[i].timer === "vertical"){
+                        if (this.toaster[i].timer === "vertical") {
                             this.toaster[i].timerEl.style.transform = `scaleY(${scale})`;
-                        }else{
+                        } else {
                             this.toaster[i].timerEl.style.transform = `scaleX(${scale})`;
                         }
                     }
@@ -67,17 +61,20 @@ export class Notifier {
     }
 
     public snackbar(settings: Partial<SnackbarNotification>) {
-        const snackbar: SnackbarNotification = Object.assign({
-            message: "Snackbar notificaitons require a message",
-            uid: this.uid(),
-            el: null,
-            duration: 30,
-            closeable: true,
-            buttons: [],
-            force: true,
-            classes: [],
-            autofocus: true,
-        }, settings);
+        const snackbar: SnackbarNotification = Object.assign(
+            {
+                message: "Snackbar notificaitons require a message",
+                uid: this.uid(),
+                el: null,
+                duration: 30,
+                closeable: true,
+                buttons: [],
+                force: true,
+                classes: [],
+                autofocus: true,
+            },
+            settings
+        );
 
         if (!Array.isArray(snackbar.buttons)) {
             snackbar.buttons = [snackbar.buttons];
@@ -88,7 +85,7 @@ export class Notifier {
         }
 
         if (snackbar.force && this.snackbarQueue.length) {
-            if (this.snackbarQueue[0]?.el?.isConnected){
+            if (this.snackbarQueue[0]?.el?.isConnected) {
                 this.snackbarQueue[0].el.remove();
             }
             this.snackbarQueue.splice(0, 1, snackbar);
@@ -98,21 +95,24 @@ export class Notifier {
     }
 
     public toast(settings: Partial<ToasterNotification>) {
-        const toast: ToasterNotification = Object.assign({
-            title: "Title Required",
-            message: "Toast notificaitons require a message",
-            closeable: true,
-            icon: null,
-            duration: 30,
-            classes: [],
-            uid: this.uid(),
-            el: null,
-            timerEl: null,
-            autofocus: true,
-            buttons: [],
-            timer: null,
-            timerDuration: 30,
-        }, settings);
+        const toast: ToasterNotification = Object.assign(
+            {
+                title: "Title Required",
+                message: "Toast notificaitons require a message",
+                closeable: true,
+                icon: null,
+                duration: 30,
+                classes: [],
+                uid: this.uid(),
+                el: null,
+                timerEl: null,
+                autofocus: true,
+                buttons: [],
+                timer: null,
+                timerDuration: 30,
+            },
+            settings
+        );
 
         if (!Array.isArray(toast.buttons)) {
             toast.buttons = [toast.buttons];
@@ -122,19 +122,29 @@ export class Notifier {
             toast.classes = [toast.classes];
         }
 
-        if (toast.duration !== Infinity && toast.timer === "vertical" || toast.timer === "horizontal"){
+        if ((toast.duration !== Infinity && toast.timer === "vertical") || toast.timer === "horizontal") {
             toast.timerDuration = toast.duration;
         }
 
         toast.el = new ToastComponent(toast);
-        if (toast.timer){
+        if (toast.timer) {
             toast.timerEl = toast.el.querySelector("toast-timer");
         }
         this.toaster.push(toast);
-        this.shell.appendChild(toast.el);
+        const shell = this.getShell();
+        shell.appendChild(toast.el);
     }
 
-    public append(el:HTMLElement){
-        this.shell.appendChild(el);
+    private getShell(): HTMLElement {
+        const shell: HTMLElement = document.body.querySelector("toaster-component") || document.createElement("toaster-component");
+        if (!shell.isConnected) {
+            document.body.appendChild(shell);
+        }
+        return shell;
+    }
+
+    public append(el: HTMLElement) {
+        const shell = this.getShell();
+        shell.appendChild(el);
     }
 }
