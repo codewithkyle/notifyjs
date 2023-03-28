@@ -1,0 +1,27 @@
+name: Deployment
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@master
+
+            - name: Setup Node and NPM
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18.0.0
+
+            - name: Install NPM Packages
+              run: npm ci
+
+            - name: Deploy
+              run: npm run deploy
+              env:
+                  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
