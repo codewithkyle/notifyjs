@@ -39,6 +39,7 @@ import snackbar from "@codewithkyle/notifyjs/snackbar";
 snackbar({
     message: "All snackbar notifications require a message",
 });
+
 // Adds an action button
 snackbar({
     message: "All snackbar notifications require a message",
@@ -129,7 +130,7 @@ Notifications are great for application-like notification systems where users wi
 ### Notification Interface 
 
 ```typescript
-type ToasterNotification = {
+type Notification = {
     title: string;
     message: string;
     closeable?: boolean;
