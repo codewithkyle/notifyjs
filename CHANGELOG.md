@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2023-03-28
+
+### Added
+
+- new Toaster functionality
+- ES Module exports:
+    - `@codewithkyle/notifyjs/toaster`
+    - `@codewithkyle/notifyjs/snackbar`
+    - `@codewithkyle/notifyjs/notifications`
+
+### Removed
+
+- common JS support
+- custom `Notifier` support
+
+### Refactored
+
+- Toast notifications functionality has been moved to new Notifications export
+- Each notification type must be explicitly imported
+
 ## [3.1.0] - 2021-03-26
 
 ### Fixed
