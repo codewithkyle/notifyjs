@@ -6,15 +6,16 @@
     "files": [
         "dist/*"
     ],
+    "types": "dist/types.d.ts",
     "exports": {
-        "./snackbar": "./dist/snackbar.js",
-        "./notifications": "./dist/notifications.js",
-        "./toaster": "./dist/toaster.js"
+        "./snackbar.js": "./dist/snackbar.js",
+        "./notifications.js": "./dist/notifications.js",
+        "./toaster.js": "./dist/toaster.js"
     },
     "scripts": {
         "cleanup": "node ./build/cleanup.js",
         "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toaster.ts --format=esm --minify --bundle --outdir=dist",
-        "prerelease": "npm run cleanup && npm run build",
+        "prerelease": "npm run cleanup && npm run build && cp ./src/types.d.ts ./dist/types.d.ts",
         "test": "npm run build && cp -r ./dist ./test/ && serve ./test",
         "deploy": "npm run build && cp -r ./dist ./test/ && node ./build/deploy.js"
     },
