@@ -14,13 +14,11 @@ class Toaster {
         const newTime = performance.now();
         const deltaTime = (newTime - this.time) / 1000;
         this.time = newTime;
-        if (document.hasFocus()) {
-            for (let i = this.toastQueue.length - 1; i >= 0; i--) {
-                this.toastQueue[i].duration -= deltaTime;
-                if (this.toastQueue[i].duration <= 0) {
-                    this.toastQueue[i].el.remove();
-                    this.toastQueue.splice(i, 1);
-                }
+        for (let i = this.toastQueue.length - 1; i >= 0; i--) {
+            this.toastQueue[i].duration -= deltaTime;
+            if (this.toastQueue[i].duration <= 0) {
+                this.toastQueue[i].el.remove();
+                this.toastQueue.splice(i, 1);
             }
         }
         window.requestAnimationFrame(this.loop.bind(this));
@@ -31,7 +29,7 @@ class Toaster {
             {
                 message: "Toast notificaitons require a message",
                 el: null,
-                duration: 30,
+                duration: 5,
                 classes: [],
             },
             settings
@@ -39,7 +37,7 @@ class Toaster {
 
         if (toast.duration === Infinity || typeof toast.duration !== "number") {
             console.warn("Toast duration must be a number");
-            toast.duration = 30;
+            toast.duration = 5;
         }
         if (!Array.isArray(toast.classes)) {
             toast.classes = [toast.classes];
@@ -48,12 +46,28 @@ class Toaster {
         const el = document.createElement("output");
         el.role = "status";
         el.innerHTML = toast.message;
-        // @ts-ignore
-        el.classList.add(toast.classes);
+        if (toast.classes.length) {
+            el.classList.add(...toast.classes);
+        }
         toast.el = el;
         this.toastQueue.push(toast);
+        this.flip(el);
+    }
+
+    private flip(el: HTMLElement) {
         const shell = this.getShell();
-        shell.appendChild(toast.el);
+        const first = shell.offsetHeight
+        shell.appendChild(el);
+        const last = shell.offsetHeight
+        const invert = last - first
+        const animation = shell.animate([
+            { transform: `translateY(${invert}px)` },
+            { transform: 'translateY(0)' }
+        ], {
+            duration: 150,
+            easing: 'ease-out',
+        });
+        animation.startTime = document.timeline.currentTime;
     }
 
     private getShell(): HTMLElement {

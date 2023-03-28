@@ -9,12 +9,13 @@
     "exports": {
         "./snackbar": "./dist/snackbar.js",
         "./notifications": "./dist/notifications.js",
-        "./toaster": "./dist/toast.js"
+        "./toaster": "./dist/toaster.js"
     },
     "scripts": {
         "cleanup": "node ./build/cleanup.js",
-        "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toast.ts --format=esm --minify --bundle --outdir=dist",
-        "prerelease": "npm run cleanup && npm run build"
+        "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toaster.ts --format=esm --minify --bundle --outdir=dist",
+        "prerelease": "npm run cleanup && npm run build",
+        "test": "npm run build && cp -r ./dist ./test/ && serve ./test"
     },
     "keywords": [
         "snackbar",

@@ -1,0 +1,93 @@
+notifications-component notification-component{background-color:var(--neutral-800);padding:1rem;border-radius:.25rem;box-shadow:var(--shadow-lg);display:flex;flex-flow:row nowrap;border-left:4px solid #4299e1;width:300px;margin:1rem 0 0; transform-origin:top left;transition:all .3s var(--ease-in-out);pointer-events:all;position:relative}
+notifications-component notification-component.-yellow{border-color:#ecc94b}
+notifications-component notification-component.-yellow i{color:#ecc94b}
+notifications-component notification-component.-red{border-color:#f56565}
+notifications-component notification-component.-red i{color:#f56565}
+notifications-component notification-component.-green{border-color:#48bb78}
+notifications-component notification-component.-green i{color:#48bb78}
+notifications-component notification-component i{width:24px;height:24px;position:relative;display:inline-flex;justify-content:center;align-items:center;margin-right:1rem;color:#4299e1}
+notifications-component notification-component i svg{width:24px;height:24px}
+notifications-component notification-component copy-wrapper{display:block;flex:1;z-index: 2;}
+notifications-component notification-component copy-wrapper h3{display:block;color:var(--white);font-weight:var(--font-bold);margin-bottom:.25rem}
+notifications-component notification-component copy-wrapper p{display:block;color:var(--neutral-300);font-size:var(--font-sm);line-height:1.618}
+notifications-component notification-component .close{z-index: 2;width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
+notifications-component notification-component .close:hover::before,
+notifications-component notification-component .close:focus::before{transform:scale(1)}
+notifications-component notification-component .close:active::before{opacity:.15}
+notifications-component notification-component .close::before{content:"";display:inline-block;width:100%;height:100%;border-radius:50%;background-color:var(--white);opacity:.06;position:absolute;transform:scale(0);transition:all 150ms var(--ease-bounce)}
+notifications-component notification-component .close svg{width:14px;height:14px}
+notifications-component notification-component notification-actions{
+    display: flex;
+    width: 100%;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+}
+notifications-component notification-component notification-actions button{
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 0.5rem;
+    color: var(--primary-300);
+    margin-left: 0.5rem;
+    position: relative;
+}
+notifications-component notification-component notification-actions button:hover::before,
+notifications-component notification-component notification-actions button:focus::before{transform:scale(1)}
+notifications-component notification-component notification-actions button:active::before{opacity:.15}
+notifications-component notification-component notification-actions button::before{content:"";display:inline-block;width:100%;height:100%;border-radius:0.25rem;background-color:var(--primary-500);opacity:.06;position:absolute;top:0;left:0;transform:scale(0);transition:all 150ms var(--ease-bounce)}
+@keyframes grow{
+    from{
+        transform:translateY(50%);
+        opacity: 0;
+    }
+    to{
+        transform:translateY(0);
+        opacity: 1;
+    }
+}
+notifications-component {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2000;
+    overflow-y: auto;
+    overflow-x: hidden;
+    pointer-events: none;
+    padding: 0 1rem;
+    width: calc(300px + 2rem);
+}
+notification-component{
+    transform: translateY(50%);
+    opacity: 0;
+    animation: grow 300ms forwards var(--ease-in);
+}
+notification-timer{
+    position: absolute;
+    background-color: var(--white);
+    
+}
+notification-timer.vertical{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.07;
+    transform-origin: bottom center;
+    z-index: 1;
+}
+notification-timer.horizontal{
+    opacity: 0.3;
+    bottom: 0;
+    left: 0;
+    height: 8px;
+    width: 100%;
+    transform-origin: right center;
+}

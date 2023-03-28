@@ -14,252 +14,22 @@
     </style>
     
     <link href="./brixi.css" rel="stylesheet" />
-    
-    <!-- Snackbar -->
-    <style>
-        snackbar-component {
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 0.25rem;
-            background-color: var(--neutral-900);
-            box-shadow: var(--shadow-lg);
-            color: var(--white);
-            min-width: 350px;
-            max-width: 90vw;
-            transform: scale(0.87);
-            opacity: 0;
-            z-index: 1000;
-            transform-origin: top left;
-            animation: notificationPop 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-            position: fixed;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        snackbar-component p {
-            padding: 0.875rem 1rem;
-            line-height: 1.618;
-            font-size: 0.875rem;
-        }
-
-        snackbar-component button {
-            user-select: none;
-            font-weight: 500;
-            font-size: 0.875rem;
-            height: 2.5rem;
-            line-height: 2.5rem;
-            padding: 0 0.5rem;
-            color: var(--primary-300);
-            text-transform: uppercase;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        snackbar-component button:not(:last-child) {
-            margin-right: 0.5rem;
-        }
-
-        snackbar-component button:hover::before,
-        snackbar-component button:focus::before {
-            transform: scale(1);
-            opacity: 0.06;
-        }
-
-        snackbar-component button:active::before {
-            opacity: 0.1;
-        }
-
-        snackbar-component button::before {
-            content: "";
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 0.25rem;
-            background-color: var(--primary-500);
-            transform-origin: center;
-            transform: scale(0);
-            opacity: 0;
-            transition: all 150ms var(--ease-bounce);
-        }
-
-        snackbar-actions {
-            display: inline-flex;
-            flex-flow: row nowrap;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 0.5rem;
-        }
-        
-        snackbar-actions .close {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            flex-flow: column wrap;
-            color: var(--white);
-            cursor: pointer;
-            user-select: none;
-            transition: all 75ms var(--ease-in-out);
-        }
-
-        snackbar-actions .close:hover::before,
-        snackbar-actions .close:focus::before {
-            transform: scale(1);
-            opacity: 0.06;
-        }
-
-        snackbar-actions .close:active::before {
-            opacity: 0.1;
-        }
-
-        snackbar-actions .close svg {
-            width: 20px;
-            height: 20px;
-            position: relative;
-            margin: 0;
-        }
-
-        snackbar-actions .close::before {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: inline-block;
-            content: "";
-            border-radius: 50%;
-            background-color: var(--white);
-            transform-origin: center;
-            transform: scale(0);
-            opacity: 0;
-            transition: all 150ms var(--ease-bounce);
-        }
-
-        @keyframes notificationPop {
-            from {
-                opacity: 0;
-                transform: scale(0.87) translateX(-50%);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateX(-50%);
-            }
-        }
-    </style>
-
-    <!-- Toast -->
-    <style>
-        toaster-component toast-component{background-color:var(--neutral-800);padding:1rem;border-radius:.25rem;box-shadow:var(--shadow-lg);display:flex;flex-flow:row nowrap;border-left:4px solid #4299e1;width:300px;margin:1rem 0 0;
-            transform-origin:top left;transition:all .3s var(--ease-in-out);pointer-events:all;position:relative}
-        toaster-component toast-component.-yellow{border-color:#ecc94b}
-        toaster-component toast-component.-yellow i{color:#ecc94b}
-        toaster-component toast-component.-red{border-color:#f56565}
-        toaster-component toast-component.-red i{color:#f56565}
-        toaster-component toast-component.-green{border-color:#48bb78}
-        toaster-component toast-component.-green i{color:#48bb78}
-        toaster-component toast-component i{width:24px;height:24px;position:relative;display:inline-flex;justify-content:center;align-items:center;margin-right:1rem;color:#4299e1}
-        toaster-component toast-component i svg{width:24px;height:24px}
-        toaster-component toast-component copy-wrapper{display:block;flex:1;z-index: 2;}
-        toaster-component toast-component copy-wrapper h3{display:block;color:var(--white);font-weight:var(--font-bold);margin-bottom:.25rem}
-        toaster-component toast-component copy-wrapper p{display:block;color:var(--neutral-300);font-size:var(--font-sm);line-height:1.618}
-        toaster-component toast-component .close{z-index: 2;width:24px;height:24px;position:absolute;top:.5rem;right:.5rem;display:flex;justify-content:center;align-items:center;color:var(--white)}
-        toaster-component toast-component .close:hover::before,
-        toaster-component toast-component .close:focus::before{transform:scale(1)}
-        toaster-component toast-component .close:active::before{opacity:.15}
-        toaster-component toast-component .close::before{content:"";display:inline-block;width:100%;height:100%;border-radius:50%;background-color:var(--white);opacity:.06;position:absolute;transform:scale(0);transition:all 150ms var(--ease-bounce)}
-        toaster-component toast-component .close svg{width:14px;height:14px}
-        toaster-component toast-component toast-actions{
-            display: flex;
-            width: 100%;
-            width: 100%;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: flex-end;
-            margin-top: 0.75rem;
-        }
-        toaster-component toast-component toast-actions button{
-            height: 36px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding: 0 0.5rem;
-            color: var(--primary-300);
-            margin-left: 0.5rem;
-            position: relative;
-        }
-        toaster-component toast-component toast-actions button:hover::before,
-        toaster-component toast-component toast-actions button:focus::before{transform:scale(1)}
-        toaster-component toast-component toast-actions button:active::before{opacity:.15}
-        toaster-component toast-component toast-actions button::before{content:"";display:inline-block;width:100%;height:100%;border-radius:0.25rem;background-color:var(--primary-500);opacity:.06;position:absolute;top:0;left:0;transform:scale(0);transition:all 150ms var(--ease-bounce)}
-        @keyframes grow{
-            from{
-                transform:translateY(50%);
-                opacity: 0;
-            }
-            to{
-                transform:translateY(0);
-                opacity: 1;
-            }
-        }
-        toaster-component {
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: 2000;
-            overflow-y: auto;
-            overflow-x: hidden;
-            pointer-events: none;
-            padding: 0 1rem;
-            width: calc(300px + 2rem);
-        }
-        toast-component{
-            transform: translateY(50%);
-            opacity: 0;
-            animation: grow 300ms forwards var(--ease-in);
-        }
-        toast-timer{
-            position: absolute;
-            background-color: var(--white);
-            
-        }
-        toast-timer.vertical{
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.07;
-            transform-origin: bottom center;
-            z-index: 1;
-        }
-        toast-timer.horizontal{
-            opacity: 0.3;
-            bottom: 0;
-            left: 0;
-            height: 8px;
-            width: 100%;
-            transform-origin: right center;
-        }
-    </style>
+    <link href="./snackbar.css" rel="stylesheet" />
+    <link href="./toaster.css" rel="stylesheet" />
+    <link href="./notifications.css" rel="stylesheet" />
 </head>
 <body>
     <div class="w-screen h-screen" flex="justify-center items-center">
         <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-snackbar">Test Snackbar</button>
+        <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-notif">Test Notification</button>
+        <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-custom-notif">Test Custom Notification</button>
         <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-toast">Test Toast</button>
-        <button style="padding: 0 1rem;margin-right: 1rem;background-color: var(--primary-700);color: #fff;height: 36px;" class="js-custom-toast">Test Custom Toast</button>
     </div>
 
     <script type="module">
-        import { snackbar, toast, append } from "./notify.min.mjs";
+        import snackbar from "./dist/snackbar.js";
+        import toaster from "./dist/toaster.js";
+        import notifications from "./dist/notifications.js";
 
         const snackbarButton = document.body.querySelector(".js-snackbar");
         snackbarButton.addEventListener("click", () =>{
@@ -276,9 +46,9 @@
             });
         });
 
-        const toastButton = document.body.querySelector(".js-toast");
-        toastButton.addEventListener("click", () => {
-            toast({
+        const notifButton = document.body.querySelector(".js-notif");
+        notifButton.addEventListener("click", () => {
+            notifications.push({
                 title: "Example Toast Message",
                 message: "This is what a toaster message might look like. Click the button to stack notifications.",
                 autofocus: true,
@@ -291,7 +61,7 @@
                 timer: "horizontal",
                 duration: 10,
             });
-            toast({
+            notifications.push({
                 icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
                 title: "Example Toast Message",
                 message: "This is what a toaster message might look like. Click the button to stack notifications.",
@@ -299,7 +69,7 @@
             });
         });
 
-        class CustomToasterElement extends HTMLElement {
+        class CustomNotificationElement extends HTMLElement {
             constructor(message){
                 super();
                 this.innerText = message;
@@ -309,10 +79,18 @@
                 }, 5000);
             }
         }
-        customElements.define("custom-toast", CustomToasterElement);
-        const customToastButton = document.body.querySelector(".js-custom-toast");
-        customToastButton.addEventListener("click", () => {
-            append(new CustomToasterElement("Custom toaster notification example."));
+        customElements.define("custom-notification-element", CustomNotificationElement);
+        const customNotifButton = document.body.querySelector(".js-custom-notif");
+        customNotifButton.addEventListener("click", () => {
+            notifications.append(new CustomNotificationElement("Custom toaster notification example."));
+        });
+
+        let count = 0;
+        const toastButton = document.body.querySelector(".js-toast");
+        toastButton.addEventListener("click", () => {
+            toaster.push({
+                message: `Example toast message ${count++}.`,
+            });
         });
     </script>
 </body>

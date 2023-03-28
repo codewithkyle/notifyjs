@@ -1,0 +1,134 @@
+snackbar-component {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+    background-color: var(--neutral-900);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+    min-width: 350px;
+    max-width: 90vw;
+    transform: scale(0.87);
+    opacity: 0;
+    z-index: 1000;
+    transform-origin: top left;
+    animation: notificationPop 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+snackbar-component p {
+    padding: 0.875rem 1rem;
+    line-height: 1.618;
+    font-size: 0.875rem;
+}
+
+snackbar-component button {
+    user-select: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    padding: 0 0.5rem;
+    color: var(--primary-300);
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+}
+
+snackbar-component button:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+snackbar-component button:hover::before,
+snackbar-component button:focus::before {
+    transform: scale(1);
+    opacity: 0.06;
+}
+
+snackbar-component button:active::before {
+    opacity: 0.1;
+}
+
+snackbar-component button::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.25rem;
+    background-color: var(--primary-500);
+    transform-origin: center;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 150ms var(--ease-bounce);
+}
+
+snackbar-actions {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+}
+
+snackbar-actions .close {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+    color: var(--white);
+    cursor: pointer;
+    user-select: none;
+    transition: all 75ms var(--ease-in-out);
+}
+
+snackbar-actions .close:hover::before,
+snackbar-actions .close:focus::before {
+    transform: scale(1);
+    opacity: 0.06;
+}
+
+snackbar-actions .close:active::before {
+    opacity: 0.1;
+}
+
+snackbar-actions .close svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 0;
+}
+
+snackbar-actions .close::before {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    content: "";
+    border-radius: 50%;
+    background-color: var(--white);
+    transform-origin: center;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 150ms var(--ease-bounce);
+}
+
+@keyframes notificationPop {
+    from {
+        opacity: 0;
+        transform: scale(0.87) translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateX(-50%);
+    }
+}
