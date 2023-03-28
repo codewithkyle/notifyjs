@@ -37,8 +37,8 @@
     "author": "Kyle Andrews",
     "license": "MIT",
     "devDependencies": {
-        "esbuild": "^0.10.0",
-        "serve": "^11.3.2",
+        "esbuild": "^0.17.14",
+        "serve": "^14.2.0",
         "typescript": "^4.2.3"
     }
 }
