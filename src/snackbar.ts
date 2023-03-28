@@ -142,6 +142,6 @@ if (!customElements.get("snackbar-component")) {
 }
 
 const snackbarManager = new Snackbar();
-const snackbar = snackbarManager.snackbar.bind(snackbarManager);
+const snackbar:(settings: Partial<SnackbarNotification>)=>void = snackbarManager.snackbar.bind(snackbarManager);
 export default snackbar;
 

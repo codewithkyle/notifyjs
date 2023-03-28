@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "outDir": "./_types",
-        "sourceMap": true,
+        "outDir": "./dist",
+        "sourceMap": false,
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
