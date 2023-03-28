@@ -6,7 +6,7 @@ const USERNAME = "codewithkyle";
 const PROJECT = "notifyjs";
 
 ghPages.publish(
-    "public",
+    "test",
     {
         user: {
             name: NAME,
