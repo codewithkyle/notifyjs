@@ -2,6 +2,14 @@
 
 Notify.js is a lightweight utility library for creating toast, snackbars, and notifications.
 
+#### CSS Not Included
+
+This library does not provide any CSS or base styling for the components / HTML Elements it produces. Example styles can be found at [Brixi UI](https://ui.brixi.dev/).
+
+- [Notifications](https://ui.brixi.dev/notifications)
+- [Toast](https://ui.brixi.dev/toast)
+- [Snackbar](https://ui.brixi.dev/snackbar)
+
 ## Installation
 
 Download Notify.js via NPM:
