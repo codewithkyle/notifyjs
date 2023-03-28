@@ -26,7 +26,7 @@ import notifications from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4
 1. [Notifications](#notifications)
     1. [Notifications Interface](#notification-interface)
     1. [Notifications HTML Structure](#notification-html-structure)
-1. [Toast Notification](#toast-notification)
+1. [Toast Notification](#toast)
     1. [Toast Interface](#toast-interface)
     1. [Toast HTML Structure](#toast-html-structure)
 
