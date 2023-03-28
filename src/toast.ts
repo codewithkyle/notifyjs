@@ -32,13 +32,25 @@ class Toaster {
                 message: "Toast notificaitons require a message",
                 el: null,
                 duration: 30,
+                classes: [],
             },
             settings
         );
+
         if (toast.duration === Infinity || typeof toast.duration !== "number") {
             console.warn("Toast duration must be a number");
             toast.duration = 30;
         }
+        if (!Array.isArray(toast.classes)) {
+            toast.classes = [toast.classes];
+        }
+
+        const el = document.createElement("output");
+        el.role = "status";
+        el.innerHTML = toast.message;
+        // @ts-ignore
+        el.classList.add(toast.classes);
+        toast.el = el;
         this.toastQueue.push(toast);
         const shell = this.getShell();
         shell.appendChild(toast.el);
@@ -51,24 +63,6 @@ class Toaster {
         }
         return shell;
     }
-}
-
-class ToastComponent extends HTMLElement {
-    private settings: ToastNotification;
-    constructor(toast: ToastNotification) {
-        super();
-        this.settings = toast;
-        this.render();
-    }
-
-    private render() {
-        this.innerHTML = `
-            <p role="alert">${this.settings.message}</p>
-        `;
-    }
-}
-if (!customElements.get("toast-component")) {
-    customElements.define("toast-component", ToastComponent);
 }
 const toaster = new Toaster();
 export default toaster;

@@ -184,6 +184,7 @@ Toast notifications are great for simple temporary alerts like "Copied to clipbo
 type ToastNotification = {
     message: string;
     duration?: number; // in seconds
+    classes?: string | string[];
 };
 ```
 
@@ -191,8 +192,6 @@ type ToastNotification = {
 
 ```html
 <toaster-component>
-    <toast-component>
-        <p>Custom toast message.</p>
-    </toast-component>
+    <output role="status">Custom toast message.</output>
 </toaster-component>
 ```

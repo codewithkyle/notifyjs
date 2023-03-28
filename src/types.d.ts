@@ -36,4 +36,5 @@ export type ToastNotification = {
     message: string,
     el: HTMLElement,
     duration: number,
+    classes: string | string[],
 }
