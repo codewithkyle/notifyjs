@@ -9,7 +9,7 @@
     "exports": {
         "./snackbar": "./dist/snackbar.js",
         "./notifications": "./dist/notifications.js",
-        "./toast": "./dist/toast.js"
+        "./toaster": "./dist/toast.js"
     },
     "scripts": {
         "cleanup": "node ./build/cleanup.js",

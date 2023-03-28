@@ -1,6 +1,6 @@
 # Notify.js
 
-Notify.js is a lightweight (2.3kb) utility library for creating [snackbar](https://material.io/develop/web/components/snackbars/) and [toaster](https://www.carbondesignsystem.com/components/notification/code/) notifications.
+Notify.js is a lightweight utility library for creating toast, snackbars, and notifications.
 
 ## Installation
 
@@ -13,21 +13,13 @@ npm i --save @codewithkyle/notifyjs
 Or use the CDN version:
 
 ```javascript
-import { Notifier, snackbar, toast, append } from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3/notify.min.mjs";
-```
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@3/notify.min.js"></script>
-<script>
-    Notifier.snackbar({ message: "This is a snackbar notification." });
-    Notifier.toast({ title: "CDN Example", message: "This is a toast notification." });
-</script>
+import toaster from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/toast.js";
+import snackbar from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/snackbar.js";
+import notifications from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/notifications.js";
 ```
 
 ## Usage
 
-1. [Notification Manager](#notification-manager)
-1. [Global Notifications](#global-manager)
 1. [Snackbar Notification](#snackbar-notification)
     1. [Snackbar Interface](#snackbar-interface)
     1. [Snackbar HTML Structure](#snackbar-html-structure)
@@ -35,48 +27,15 @@ import { Notifier, snackbar, toast, append } from "https://cdn.jsdelivr.net/npm/
     1. [Toast Interface](#toast-interface)
     1. [Toast HTML Structure](#toast-html-structure)
 
-There are two ways to use this package. You can create a Notification Manager or use the global manager. Each manager has a queue and new notifications are placed in the queue in the order that they're requested. The queue can be skipped by settings the `force` value to true.
-
-### Notification Manager
-
-Import the manager:
-
-```typescript
-import { Notifier } from "@codewithkyle/notifyjs";
-const notifier = new Notifier();
-```
-
-Create a snackbar or toast notification:
-
-```typescript
-notifier.snackbar({
-    message: "All snackbar notifications require a message",
-});
-notifier.toast({
-    title: "Toast notificaitons require a title",
-    message: "And they require a message",
-});
-```
-
 ### Global Manager
 
 Import the notification type:
 
 ```typescript
-import { snackbar, toast } from "@codewithkyle/notifyjs";
-```
-
-Create a notification:
-
-```typescript
+import snackbar from "@codewithkyle/notifyjs/snackbar";
 snackbar({
     message: "All snackbar notifications require a message",
 });
-toast({
-    title: "Toast notificaitons require a title",
-    message: "And they require a message",
-});
-
 // Adds an action button
 snackbar({
     message: "All snackbar notifications require a message",
@@ -91,12 +50,15 @@ snackbar({
 });
 ```
 
-Append custom toast notifications:
-
 ```typescript
-import { append } from "@codewithkyle/notifyjs";
+import notifications from "@codewithkyle/notifyjs/notifications";
+notifications.push({
+    title: "Notificaitons require a title",
+    message: "They also require a message.",
+});
 
-class CustomToasterElement extends HTMLElement {
+// Append custom toast notifications:
+class CustomNotificationElement extends HTMLElement {
     constructor(message){
         super();
         this.innerText = message;
@@ -105,15 +67,21 @@ class CustomToasterElement extends HTMLElement {
         }, 5000);
     }
 }
+notifications.append(new CustomNotificationElement());
+```
 
-append(new CustomToasterElement());
+```typescript
+import toaster from "@codewithkyle/notifyjs/toaster";
+toaster.push({
+    message: "Toast notifications require a message."
+});
 ```
 
 ---
 
 ## Snackbar Notification
 
-Snackbar notifications are great for quick one-off notifications.
+Snackbar notifications are great for quick one-off notifications that require an action.
 
 ### Snackbar Interface 
 
@@ -151,11 +119,11 @@ interface SnackbarNotification {
 
 ---
 
-## Toast Notification
+## Notifications
 
-Toaster notifications are great for application-like notification systems where users will need to recieve warnings, updates, successes, and errors.
+Notifications are great for application-like notification systems where users will need to recieve warnings, updates, successes, and errors.
 
-### Toast Interface 
+### Notification Interface 
 
 ```typescript
 type ToasterNotification = {
@@ -177,25 +145,50 @@ type ToasterNotification = {
 };
 ```
 
-### Toast HTML Structure
+### Notification HTML Structure
 
 ```html
-<toaster-component>
-    <toast-component>
+<notifications-component>
+    <notification-component>
         <i>
             <svg />
         </i>
         <copy-wrapper>
             <h3>Title</h3>
             <p>Custom notification message</p>
-            <toast-actions>
+            <notification-actions>
                 <button>Action</button>
-            </toast-actions>
+            </notification-actions>
         </copy-wrapper>
         <button class="close">
             <svg />
         </button>
-        <toast-timer class="vertical || horizontal"></toast-timer>
+        <notification-timer class="vertical || horizontal"></notification-timer>
+    </notification-component>
+</notifications-component>
+```
+
+---
+
+## Toast
+
+Toast notifications are great for simple temporary alerts like "Copied to clipboard" or "Added to playlist".
+
+### Toast Interface 
+
+```typescript
+type ToastNotification = {
+    message: string;
+    duration?: number; // in seconds
+};
+```
+
+### Toast HTML Structure
+
+```html
+<toaster-component>
+    <toast-component>
+        <p>Custom toast message.</p>
     </toast-component>
 </toaster-component>
 ```
