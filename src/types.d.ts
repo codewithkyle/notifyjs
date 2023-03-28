@@ -8,7 +8,6 @@ export type NotificationButton = {
 
 export type SnackbarNotification = {
     message: string;
-    uid: string;
     duration?: number;
     closeable?: boolean;
     buttons?: Array<NotificationButton>;
@@ -18,14 +17,13 @@ export type SnackbarNotification = {
     autofocus?: boolean;
 };
 
-export type ToasterNotification = {
+export type Notification = {
     title: string;
     message: string;
     closeable?: boolean;
     icon?: string;
     duration?: number;
     classes?: string[];
-    uid: string;
     el: HTMLElement;
     timerEl?: HTMLElement;
     autofocus?: boolean;
@@ -33,3 +31,9 @@ export type ToasterNotification = {
     timer?: "vertical" | "horizontal";
     timerDuration?: number;
 };
+
+export type ToastNotification = {
+    message: string,
+    el: HTMLElement,
+    duration: number,
+}

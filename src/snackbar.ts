@@ -1,6 +1,72 @@
-import { SnackbarNotification, NotificationButton } from "./types";
+import type { SnackbarNotification, NotificationButton } from "./types";
 
-export class SnackbarComponent extends HTMLElement {
+class Snackbar {
+    private snackbarQueue: Array<SnackbarNotification>;
+    private time: number;
+
+    constructor() {
+        this.snackbarQueue = [];
+        this.time = performance.now();
+        this.loop();
+    }
+
+    private loop() {
+        const newTime = performance.now();
+        const deltaTime = (newTime - this.time) / 1000;
+        this.time = newTime;
+        if (document.hasFocus()) {
+            if (this.snackbarQueue.length) {
+                if (!this.snackbarQueue?.[0]?.el) {
+                    this.snackbarQueue[0].el = new SnackbarComponent(this.snackbarQueue[0]);
+                    document.body.appendChild(this.snackbarQueue[0].el);
+                }
+                if (this.snackbarQueue[0]?.duration && this.snackbarQueue[0]?.duration !== Infinity && this.snackbarQueue[0]?.el?.isConnected) {
+                    this.snackbarQueue[0].duration -= deltaTime;
+                    if (this.snackbarQueue[0].duration <= 0) {
+                        this.snackbarQueue[0].el.remove();
+                        this.snackbarQueue.splice(0, 1);
+                    }
+                }
+            }
+        }
+        window.requestAnimationFrame(this.loop.bind(this));
+    }
+
+    public snackbar(settings: Partial<SnackbarNotification>) {
+        const snackbar: SnackbarNotification = Object.assign(
+            {
+                message: "Snackbar notificaitons require a message",
+                el: null,
+                duration: 30,
+                closeable: true,
+                buttons: [],
+                force: true,
+                classes: [],
+                autofocus: true,
+            },
+            settings
+        );
+
+        if (!Array.isArray(snackbar.buttons)) {
+            snackbar.buttons = [snackbar.buttons];
+        }
+
+        if (!Array.isArray(snackbar.classes)) {
+            snackbar.classes = [snackbar.classes];
+        }
+
+        if (snackbar.force && this.snackbarQueue.length) {
+            if (this.snackbarQueue[0]?.el?.isConnected) {
+                this.snackbarQueue[0].el.remove();
+            }
+            this.snackbarQueue.splice(0, 1, snackbar);
+        } else {
+            this.snackbarQueue.push(snackbar);
+        }
+    }
+}
+
+class SnackbarComponent extends HTMLElement {
     private settings: SnackbarNotification;
     constructor(snackbar: SnackbarNotification) {
         super();
@@ -20,7 +86,6 @@ export class SnackbarComponent extends HTMLElement {
     };
 
     private render() {
-        this.dataset.uid = this.settings.uid;
         for (let i = 0; i < this.settings.classes.length; i++) {
             this.classList.add(this.settings.classes[i]);
         }
@@ -72,3 +137,11 @@ export class SnackbarComponent extends HTMLElement {
         }
     }
 }
+if (!customElements.get("snackbar-component")) {
+    customElements.define("snackbar-component", SnackbarComponent);
+}
+
+const snackbarManager = new Snackbar();
+const snackbar = snackbarManager.snackbar.bind(snackbarManager);
+export default snackbar;
+

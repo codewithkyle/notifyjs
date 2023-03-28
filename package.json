@@ -1,36 +1,26 @@
 {
     "name": "@codewithkyle/notifyjs",
-    "version": "3.1.1",
-    "description": "A simple JavaScript library for creating toaster & snackbar notifications",
-    "main": "notify.js",
+    "version": "4.0.0",
+    "description": "A simple JavaScript library for creating toast, snackbars, and notifications",
+    "type": "module",
     "files": [
-        "notify.js",
-        "notify.js.map",
-        "notifier.js",
-        "notifier.js.map",
-        "snackbar-component.js",
-        "snackbar-component.js.map",
-        "toast-component.js",
-        "toast-component.js.map",
-        "notify.min.mjs",
-        "notifier.d.ts",
-        "notify.d.ts",
-        "snackbar-component.d.ts",
-        "toast-component.d.ts",
-        "types.d.ts",
-        "notify.min.js"
+        "dist/*"
     ],
+    "exports": {
+        "./snackbar": "./dist/snackbar.js",
+        "./notifications": "./dist/notifications.js",
+        "./toast": "./dist/toast.js"
+    },
     "scripts": {
         "cleanup": "node ./build/cleanup.js",
-        "compile": "tsc",
-        "test": "npm run compile && npm run bundle && cp ./notify.min.mjs ./test/notify.min.mjs && serve ./test",
-        "bundle": "esbuild ./notify.js --outfile=notify.min.mjs --format=esm --minify --bundle && esbuild ./notify.js --outfile=notify.min.js --format=iife --minify-whitespace --global-name=Notifier  --bundle",
-        "prerelease": "npm run cleanup && npm run compile && npm run bundle && cp ./src/types.d.ts ./types.d.ts"
+        "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toast.ts --format=esm --minify --bundle --outdir=dist",
+        "prerelease": "npm run cleanup && npm run build"
     },
     "keywords": [
         "snackbar",
         "notification",
         "toaster",
+        "toast",
         "web-components",
         "lightweight"
     ],
