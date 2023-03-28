@@ -13,7 +13,7 @@ npm i --save @codewithkyle/notifyjs
 Or use the CDN version:
 
 ```javascript
-import toaster from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/toast.js";
+import toaster from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/toaster.js";
 import snackbar from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/snackbar.js";
 import notifications from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/notifications.js";
 ```
