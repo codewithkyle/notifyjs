@@ -25,6 +25,12 @@ toaster-component output{
         fade-out 0.3s 4.4s ease;
     animation-fill-mode: forwards;
     font-size: var(--font-sm);
+    user-select: none;
+    cursor: pointer;
+    pointer-events: all;
+}
+toaster-component output:active{
+    transform: scale(0.95);
 }
 @keyframes fade-in {
   from { opacity: 0 }
