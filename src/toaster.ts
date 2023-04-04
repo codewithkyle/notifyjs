@@ -17,7 +17,9 @@ class Toaster {
         for (let i = this.toastQueue.length - 1; i >= 0; i--) {
             this.toastQueue[i].duration -= deltaTime;
             if (this.toastQueue[i].duration <= 0) {
-                this.toastQueue[i].el.remove();
+                if (this.toastQueue[i].el.isConnected) {
+                    this.toastQueue[i].el.remove();
+                }
                 this.toastQueue.splice(i, 1);
             }
         }
@@ -50,6 +52,10 @@ class Toaster {
             el.classList.add(...toast.classes);
         }
         toast.el = el;
+        toast.el.addEventListener("click", () => {
+            toast.el.remove();
+            this.toastQueue.splice(this.toastQueue.indexOf(toast), 1);
+        });
         this.toastQueue.push(toast);
         this.flip(el);
     }
