@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2023-04-04
+
+### Added
+
+- ability to click-to-close toast
+
 ## [4.0.0] - 2023-03-28
 
 ### Added
@@ -177,7 +183,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Entire existing codebase due to rewrite
 
-[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v4.0.0...HEAD
+[unreleased]: https://github.com/codewithkyle/notifyjs/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/codewithkyle/notifyjs/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/codewithkyle/notifyjs/compare/v3.2.0...v4.0.0
 [3.1.0]: https://github.com/codewithkyle/notifyjs/compare/v3.0.0...v3.2.0
 [3.0.0]: https://github.com/codewithkyle/notifyjs/compare/v2.1.1...v3.0.0
