@@ -24,6 +24,7 @@ Or use the CDN version:
 import toaster from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/toaster.js";
 import snackbar from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/snackbar.js";
 import notifications from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4/dist/notifications.js";
+import sonner from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@5/dist/sonner.js";
 ```
 
 ## Usage
@@ -37,6 +38,9 @@ import notifications from "https://cdn.jsdelivr.net/npm/@codewithkyle/notifyjs@4
 1. [Toast Notification](#toast)
     1. [Toast Interface](#toast-interface)
     1. [Toast HTML Structure](#toast-html-structure)
+1. [Sonner Notification](#sonner)
+    1. [Sonner Interface](#sonner-interface)
+    1. [Sonner HTML Structure](#sonner-html-structure)
 
 ### Global Manager
 
@@ -89,6 +93,58 @@ toaster.push({
 });
 ```
 
+```typescript
+import sonner from "@codewithkyle/notifyjs/sonner";
+sonner.push({
+    heading: "Sonner toast example",
+    message: "Heading and message are optional."
+});
+```
+
+### Custom Events
+
+If you are working with a server rendered web application using tools like [HTMX](https://htmx.org/) you can trigger events using [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) dispatched on the `window`
+
+```typescript
+const event = new CustomEvent("notify:sonner", {
+    detail: {
+        heading: "Sonner Example",
+        message: `Example sonner toast message.`,
+    }
+});
+window.dispatchEvent(event);
+```
+
+The follow events are supported:
+
+- `notify:sonner`
+- `notify:alert`
+- `notify:toast`
+- `notify:snackbar`
+
+The `detail` object accepts the same interfaces as the function versions (see below).
+
+### Custom Event Callbacks
+
+As of version 5 all callback interfaces support  `event` and `eventData` properties. When the user interacts with but button a custom event will be fired on the `window`.
+
+```typescript
+import sonner from "@codewithkyle/notifyjs/sonner";
+sonner.push({
+    message: "Heading and message are optional.",
+    button: {
+        label: "Test",
+        event: "test-event",
+        eventData: "Hi mom!",
+    }
+});
+
+// received when the user clicks the button within the sonner notification
+window.addEventListener("test-event", (e)=>{
+    alert(e.detail);
+});
+```
+
 ---
 
 ## Snackbar Notification
@@ -98,16 +154,18 @@ Snackbar notifications are great for quick one-off notifications that require an
 ### Snackbar Interface 
 
 ```typescript
-interface SnackbarNotification {
+type SnackbarNotification = {
     message: string;
     duration?: number; // in seconds
     closeable?: boolean;
     buttons?: Array<{
         label: string;
-        callback: Function;
+        callback?: Function;
         ariaLabel?: string;
         classes?: Array<string> | string;
         autofocus?: boolean;
+        event?: string;
+        eventData?: any;
     }>;
     force?: boolean; // defaults to true
     classes?: Array<string> | string;
@@ -148,10 +206,12 @@ type Notification = {
     autofocus?: boolean; // defaults to true
     buttons?: Array<{
         label: string;
-        callback: Function;
+        callback?: Function;
         ariaLabel?: string;
         classes?: Array<string> | string;
         autofocus?: boolean;
+        event?: string;
+        eventData?: any;
     }>;
     timer?: "vertical" | "horizontal" | null; // defaults to null
 };
@@ -202,4 +262,40 @@ type ToastNotification = {
 <toaster-component>
     <output role="status">Custom toast message.</output>
 </toaster-component>
+```
+
+## Sonner
+
+Sonner notifications are great for simple temporary alerts.
+
+### Sonner Interface 
+
+```typescript
+type SonnerNotification = {
+    heading?: string,
+    message?: string,
+    duration?: number,
+    classes?: Array<string>|string,
+    button?: {
+        callback?: Function,
+        label: string,
+        classes?: Array<string>|string,
+        event?: string;
+        eventData?: any;
+    }
+};
+```
+
+### Sonner HTML Structure
+
+```html
+<sonner-component>
+    <sonner-toast-component>
+        <copy-wrapper>
+            <h3>Example heading</h3>
+            <p>This is an example sonner message.</p>
+        </copy-wrapper>
+        <button>Click me</button>
+    </sonner-toast-component>
+</sonner-component>
 ```
