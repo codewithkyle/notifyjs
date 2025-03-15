@@ -1,6 +1,6 @@
 {
     "name": "@codewithkyle/notifyjs",
-    "version": "4.1.0",
+    "version": "5.0.0-alpha",
     "description": "A simple JavaScript library for creating toast, snackbars, and notifications",
     "type": "module",
     "files": [
@@ -10,11 +10,12 @@
     "exports": {
         "./snackbar.js": "./dist/snackbar.js",
         "./notifications.js": "./dist/notifications.js",
-        "./toaster.js": "./dist/toaster.js"
+        "./toaster.js": "./dist/toaster.js",
+        "./sonner.js": "./dist/sonner.js"
     },
     "scripts": {
         "cleanup": "node ./build/cleanup.js",
-        "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toaster.ts --format=esm --minify --bundle --outdir=dist",
+        "build": "tsc && esbuild ./src/snackbar.ts ./src/notifications.ts ./src/toaster.ts ./src/sonner.ts --format=esm --minify --bundle --outdir=dist",
         "prerelease": "npm run cleanup && npm run build && cp ./src/types.d.ts ./dist/types.d.ts",
         "test": "npm run build && cp -r ./dist ./test/ && serve ./test",
         "deploy": "npm run build && cp -r ./dist ./test/ && node ./build/deploy.js"
@@ -24,6 +25,7 @@
         "notification",
         "toaster",
         "toast",
+        "sonner",
         "web-components",
         "lightweight"
     ],

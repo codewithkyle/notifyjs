@@ -1,0 +1,88 @@
+sonner-component {
+    display: block;
+    width: 350px;
+    height: 0;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 99999999;
+    box-sizing: border-box;
+
+    sonner-toast-component {
+        position: absolute;
+        opacity: var(--opacity);
+        transform: translateY(var(--y)) translateY(var(--offset)) scale(var(--scale));
+        touch-action: none;
+        transition: transform 300ms var(--ease-in-out), opacity 300ms var(--ease-in-out), height 300ms var(--ease-in-out), box-shadow 300ms var(--ease-in-out);
+        box-sizing: border-box;
+        padding: 1rem 1.25rem;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        min-height: 66px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        background: var(--grey-900);
+        border: 1px solid var(--grey-800);
+        border-radius: 0.5rem;
+
+        &[data-button] {
+            padding-right: 1rem;
+        }
+
+        copy-wrapper {
+            display: grid;
+            grid-template-rows: 1fr;
+            gap: 0.25rem;
+            width: 100%;
+            flex: 1;
+
+            h3 {
+                display: block;
+                color: var(--grey-100);
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+
+            p {
+                display: block;
+                color: var(--grey-400);
+                font-size: 0.75rem;
+                line-height: 1.375;
+            }
+        }
+
+        button {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0 0.75rem;
+            background-color: hsl(var(--grey-800-hsl) / 0.87);
+            border-color: var(--grey-700);
+            height: 24px;
+            border-radius: 4px;
+            min-width: 53px;
+            font-size: 0.75rem;
+            color: var(--grey-300);
+
+            &:hover {
+                color: var(--grey-100);
+                background-color: hsl(var(--grey-400-hsl) / 0.1);
+            }
+
+            &:focus-visibile {
+                color: var(--grey-100);
+                background-color: hsl(var(--grey-400-hsl) / 0.1);
+            }
+
+            &:active {
+                color: var(--grey-50);
+                background-color: hsl(var(--grey-400-hsl) / 0.15);
+            }
+        }
+    }
+}

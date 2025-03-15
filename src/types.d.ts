@@ -38,3 +38,24 @@ export type ToastNotification = {
     duration: number,
     classes: string | string[],
 }
+
+export type SonnerNotification = {
+    heading: string,
+    message: string,
+    el: SonnerToast,
+    duration: number,
+    classes: Array<string>|string,
+    button: {
+        callback: Function,
+        label: string,
+        classes: Array<string>|string,
+    }
+}
+
+export interface SonnerToast extends HTMLElement {
+    expand: (offset:number)=>void,
+    collapse: Function,
+    delete: ()=>void,
+    update: (dt:number)=>void,
+    updateIndex: (idx:number)=>void,
+}
