@@ -12,8 +12,8 @@ sonner-component {
         position: absolute;
         opacity: var(--opacity);
         transform: translateY(var(--y)) translateY(var(--offset)) scale(var(--scale));
-        touch-action: none;
         transition: transform 300ms var(--ease-in-out), opacity 300ms var(--ease-in-out), height 300ms var(--ease-in-out), box-shadow 300ms var(--ease-in-out);
+        touch-action: none;
         box-sizing: border-box;
         padding: 1rem 1.25rem;
         display: flex;

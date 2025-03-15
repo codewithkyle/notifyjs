@@ -9,6 +9,7 @@ This library does not provide any CSS or base styling for the components / HTML 
 - [Notifications](https://ui.brixi.dev/notifications)
 - [Toast](https://ui.brixi.dev/toast)
 - [Snackbar](https://ui.brixi.dev/snackbar)
+- Sonner (coming soon)
 
 ## Installation
 
@@ -103,7 +104,7 @@ sonner.push({
 
 ### Custom Events
 
-If you are working with a server rendered web application using tools like [HTMX](https://htmx.org/) you can trigger events using [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) dispatched on the `window`
+As of version 5 you can trigger notifications using [custom events](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) dispatched on the `window`.
 
 ```typescript
 const event = new CustomEvent("notify:sonner", {
@@ -126,7 +127,7 @@ The `detail` object accepts the same interfaces as the function versions (see be
 
 ### Custom Event Callbacks
 
-As of version 5 all callback interfaces support  `event` and `eventData` properties. When the user interacts with but button a custom event will be fired on the `window`.
+As of version 5 all callback interfaces support  `event` and `eventData` properties. When the user interacts with a button a custom event will be fired on the `window`.
 
 ```typescript
 import sonner from "@codewithkyle/notifyjs/sonner";
@@ -266,7 +267,19 @@ type ToastNotification = {
 
 ## Sonner
 
-Sonner notifications are great for simple temporary alerts.
+Sonner notifications are great for simple temporary alerts. The Sonner notification is slightly opinionated due to the custom interaction and animations.
+
+```css
+sonner-toast-component {
+    opacity: var(--opacity);
+    transform: translateY(var(--y)) translateY(var(--offset)) scale(var(--scale));
+    transition: transform 300ms var(--ease-in-out), opacity 300ms var(--ease-in-out);
+    left: 0;
+    bottom: 0;
+}
+```
+
+> **Note**: the sonner components UX is based on the look and feel of the [Sonner react package](https://sonner.emilkowal.ski/).
 
 ### Sonner Interface 
 
