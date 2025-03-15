@@ -8,6 +8,9 @@ class Notifications {
         this.notifications = [];
         this.time = performance.now();
         this.loop();
+        window.addEventListener("notify:alert", (e:CustomEvent) => {
+            if (e?.detail) this.push(e.detail);
+        });
     }
 
     private loop() {

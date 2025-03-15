@@ -8,6 +8,9 @@ class Toaster {
         this.toastQueue = [];
         this.time = performance.now();
         this.loop();
+        window.addEventListener("notify:toast", (e:CustomEvent) => {
+            if (e?.detail) this.push(e.detail);
+        });
     }
 
     private loop() {

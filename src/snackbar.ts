@@ -8,6 +8,9 @@ class Snackbar {
         this.snackbarQueue = [];
         this.time = performance.now();
         this.loop();
+        window.addEventListener("notify:snackbar", (e:CustomEvent) => {
+            if (e?.detail) this.snackbar(e.detail);
+        });
     }
 
     private loop() {
