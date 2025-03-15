@@ -120,6 +120,8 @@ class Sonner extends HTMLElement {
                 callback: ()=>{},
                 label: "",
                 classes: "",
+                event: null,
+                eventData: null,
             },
         }, settings);
 
@@ -131,7 +133,6 @@ class Sonner extends HTMLElement {
             toast.classes = [toast.classes];
         }
         if (typeof toast.button?.callback !== "function") {
-            console.warn("Sonner callback must be a function");
             toast.button.callback = ()=>{};
         }
         if (!toast.button?.classes) {
@@ -208,6 +209,11 @@ class SonnerToast extends HTMLElement {
         if (buttonEl) {
             buttonEl.addEventListener("click", ()=>{
                 this.settings.button.callback();
+                if (this.settings.button?.event !== null) {
+                    window.dispatchEvent(new CustomEvent(this.settings.button.event, {
+                        detail: this.settings.button?.eventData ?? null,
+                    }));
+                }
                 this.delete();
             });
         }

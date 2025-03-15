@@ -44,11 +44,20 @@
 
         let count = 0;
 
+        window.addEventListener("test-event", (e)=>{
+            alert(e.detail);
+        });
+
         const sonner2 = document.body.querySelector(".js-sonner2");
         sonner2.addEventListener("click", ()=>{
             const event = new CustomEvent("notify:sonner", {
                 detail: {
                     message: `Example sonner toast message.`,
+                    button: {
+                        label: "Test",
+                        event: "test-event",
+                        eventData: "Hi mom!",
+                    }
                 }
             });
             window.dispatchEvent(event);

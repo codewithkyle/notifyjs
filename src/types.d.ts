@@ -1,9 +1,11 @@
 export type NotificationButton = {
     label: string;
-    callback: Function;
+    callback?: Function;
     ariaLabel?: string;
     classes?: string[];
     autofocus?: boolean;
+    event: string;
+    eventData: any;
 };
 
 export type SnackbarNotification = {
@@ -46,9 +48,11 @@ export type SonnerNotification = {
     duration: number,
     classes: Array<string>|string,
     button: {
-        callback: Function,
+        callback?: Function,
         label: string,
         classes: Array<string>|string,
+        event?: string;
+        eventData?: any;
     }
 }
 

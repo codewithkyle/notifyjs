@@ -108,7 +108,12 @@ class NotificationComponent extends HTMLElement {
     private handleActionButtonClick: EventListener = (e: Event) => {
         const target = e.currentTarget as HTMLElement;
         const index = parseInt(target.dataset.index);
-        this.settings.buttons[index].callback();
+        this.settings.buttons?.[index]?.callback();
+        if (this.settings.buttons?.[index]?.event !== null) {
+            window.dispatchEvent(new CustomEvent(this.settings.buttons[index].event, {
+                detail: this.settings.buttons[index]?.eventData ?? null,
+            }));
+        }
         this.remove();
     };
 
